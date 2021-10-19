@@ -1,4 +1,4 @@
-package de.lolgamr17.recursion;
+package de.lolgamr17.random;
 
 import java.util.Scanner;
 
