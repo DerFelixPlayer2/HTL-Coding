@@ -1,9 +1,6 @@
 package de.lolgamr17;
 
-import de.lolgamr17.strings.*;
-
 import java.util.Random;
-import java.util.zip.CheckedOutputStream;
 
 public class Main {
     public static void main(String[] args) {
