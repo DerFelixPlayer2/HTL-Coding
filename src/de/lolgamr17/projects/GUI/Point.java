@@ -18,7 +18,7 @@ public class Point {
 
     @Contract(" -> new")
     public static @NotNull Point readPoint() {
-        System.out.print("Point (x, y): ");
+        System.out.print("Location (x, y): ");
         int x = scanner.nextInt();
         int y = scanner.nextInt();
         return new Point(x, y);

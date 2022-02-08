@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class PolyLine {
-    @NotNull
+    /*@NotNull
     private final Point[] points;
     //private final int pointCount;
 
@@ -44,5 +44,5 @@ public class PolyLine {
         for (int i = 0; i < points.length; i++)
             sb.append(points[i].asString()).append(i == points.length - 1 ? "" : ", ");
         return sb.append(")").toString();
-    }
+    }*/
 }
