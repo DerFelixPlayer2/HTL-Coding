@@ -1,4 +1,4 @@
-package de.lolgamr17.standalone.classes;
+package de.lolgamr17.non_standalone.classes;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
