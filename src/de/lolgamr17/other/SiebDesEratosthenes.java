@@ -1,4 +1,4 @@
-package de.lolgamr17.standalone.random;
+package de.lolgamr17.other;
 
 import java.util.Arrays;
 

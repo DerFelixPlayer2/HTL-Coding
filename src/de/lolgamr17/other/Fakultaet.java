@@ -1,4 +1,4 @@
-package de.lolgamr17.standalone.recursion;
+package de.lolgamr17.other;
 
 public class Fakultaet {
     public static void main(String[] args) {

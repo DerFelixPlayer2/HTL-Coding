@@ -1,4 +1,4 @@
-package de.lolgamr17.random;
+package de.lolgamr17.other;
 
 public class Minischleife {
     public static void main(String[] args) {
