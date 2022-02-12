@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/felix/CLionProjects/Zensur/zensur.cpp
+zensur.h
+C:/Users/felix/CLionProjects/Zensur/zensur.h
+
+C:/Users/felix/CLionProjects/Zensur/zensur.h
+string
+-
+

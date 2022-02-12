@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/felix/CLionProjects/Treasure/main.cpp
+cstdio
+-
+cstdlib
+-
+cassert
+-
+ctime
+-
+cstring
+-
+treasure.h
+C:/Users/felix/CLionProjects/Treasure/treasure.h
+
+C:/Users/felix/CLionProjects/Treasure/treasure.h
+

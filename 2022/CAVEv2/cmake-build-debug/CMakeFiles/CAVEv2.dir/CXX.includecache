@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/felix/CLionProjects/CAVEv2/cave.cpp
+cave.h
+C:/Users/felix/CLionProjects/CAVEv2/cave.h
+cstring
+-
+iostream
+-
+stack
+-
+
+C:/Users/felix/CLionProjects/CAVEv2/cave.h
+

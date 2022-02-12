@@ -1,0 +1,3 @@
+C:/Users/felix/CLionProjects/Pool/cmake-build-ioi/CMakeFiles/Pool.dir
+C:/Users/felix/CLionProjects/Pool/cmake-build-ioi/CMakeFiles/edit_cache.dir
+C:/Users/felix/CLionProjects/Pool/cmake-build-ioi/CMakeFiles/rebuild_cache.dir

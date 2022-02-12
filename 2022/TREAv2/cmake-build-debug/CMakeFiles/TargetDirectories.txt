@@ -1,0 +1,3 @@
+C:/Users/felix/CLionProjects/TREAv2/cmake-build-debug/CMakeFiles/TREA2.dir
+C:/Users/felix/CLionProjects/TREAv2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/felix/CLionProjects/TREAv2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
