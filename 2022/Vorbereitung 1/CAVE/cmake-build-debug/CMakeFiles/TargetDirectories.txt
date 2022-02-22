@@ -1,0 +1,3 @@
+C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/Vorbereitung 1/CAVE/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/Vorbereitung 1/CAVE/cmake-build-debug/CMakeFiles/CAVE.dir
+C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/Vorbereitung 1/CAVE/cmake-build-debug/CMakeFiles/rebuild_cache.dir
