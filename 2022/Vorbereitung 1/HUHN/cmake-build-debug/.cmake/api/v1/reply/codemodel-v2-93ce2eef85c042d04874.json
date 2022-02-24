@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "HUHN",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "HUHN::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-HUHN-Debug-00a28782542177392c6e.json",
+					"name" : "HUHN",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/Vorbereitung 1/HUHN/cmake-build-debug",
+		"source" : "C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/Vorbereitung 1/HUHN"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
