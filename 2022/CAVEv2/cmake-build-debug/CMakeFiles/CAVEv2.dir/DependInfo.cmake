@@ -4,21 +4,12 @@ set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
 
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/felix/CLionProjects/CAVEv2/cave.cpp" "C:/Users/felix/CLionProjects/CAVEv2/cmake-build-debug/CMakeFiles/CAVEv2.dir/cave.cpp.obj"
-  "C:/Users/felix/CLionProjects/CAVEv2/grader.cpp" "C:/Users/felix/CLionProjects/CAVEv2/cmake-build-debug/CMakeFiles/CAVEv2.dir/grader.cpp.obj"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
   )
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/CAVEv2/cave.cpp" "CMakeFiles/CAVEv2.dir/cave.cpp.obj" "gcc" "CMakeFiles/CAVEv2.dir/cave.cpp.obj.d"
+  "C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/CAVEv2/grader.cpp" "CMakeFiles/CAVEv2.dir/grader.cpp.obj" "gcc" "CMakeFiles/CAVEv2.dir/grader.cpp.obj.d"
   )
 
 # Targets to which this target links.

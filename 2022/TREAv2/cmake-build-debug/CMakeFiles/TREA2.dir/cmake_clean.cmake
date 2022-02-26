@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/TREA2.dir/grader.cpp.obj"
+  "CMakeFiles/TREA2.dir/grader.cpp.obj.d"
   "CMakeFiles/TREA2.dir/treasure.cpp.obj"
+  "CMakeFiles/TREA2.dir/treasure.cpp.obj.d"
   "TREA2.exe"
   "TREA2.exe.manifest"
   "TREA2.pdb"

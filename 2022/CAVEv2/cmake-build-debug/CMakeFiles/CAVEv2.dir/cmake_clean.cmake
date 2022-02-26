@@ -3,7 +3,9 @@ file(REMOVE_RECURSE
   "CAVEv2.exe.manifest"
   "CAVEv2.pdb"
   "CMakeFiles/CAVEv2.dir/cave.cpp.obj"
+  "CMakeFiles/CAVEv2.dir/cave.cpp.obj.d"
   "CMakeFiles/CAVEv2.dir/grader.cpp.obj"
+  "CMakeFiles/CAVEv2.dir/grader.cpp.obj.d"
   "libCAVEv2.dll.a"
 )
 

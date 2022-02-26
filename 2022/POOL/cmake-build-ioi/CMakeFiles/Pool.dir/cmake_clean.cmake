@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Pool.dir/main.cpp.obj"
+  "CMakeFiles/Pool.dir/main.cpp.obj.d"
   "Pool.exe"
   "Pool.exe.manifest"
   "Pool.pdb"
