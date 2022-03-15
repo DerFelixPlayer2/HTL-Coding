@@ -1,10 +1,23 @@
 package de.lolgamr17;
 
+import de.lolgamr17.interfaces.List;
+
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Random rand = new Random();
+
+        List l = new List();
+
+        l.add(new List.Node(3));
+        l.add(new List.Node(2));
+        l.add(new List.Node(4));
+        l.add(new List.Node(1));
+
+        l.print();
+
+
+        //Random rand = new Random();
         //int[] arr = new int[]{1, 2, 3, 4, 5, 6};
 
         /*int[] a = Split.main(84, 82);
