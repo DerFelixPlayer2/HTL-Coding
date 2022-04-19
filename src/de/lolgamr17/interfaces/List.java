@@ -5,17 +5,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
-public class List implements Iterable<List.Node> {
+public class List implements Iterable<Integer> {
     private Node head = null;
 
-    public void add(Comparable<Node> obj) {
-        Node n = (Node) obj;
+    public void add(Comparable<Integer> obj) {
+        Node n = new Node((Integer) obj);
         if (head == null) {
             head = n;
         } else {
             Node current = head, d = null;
             do {
-                if (current.compareTo(n) >= 0) {
+                if (current.compareTo(n.val) >= 0) {
                     if (d == null) {
                         n.next = current;
                         head = n;
@@ -34,14 +34,14 @@ public class List implements Iterable<List.Node> {
     }
 
     public void print() {
-        for (Node c : this)
+        for (Object c : this)
             System.out.println(c);
     }
 
-    public boolean contains(Comparable<Node> obj) {
+    /*public boolean contains(Comparable<Integer> obj) {
         Node current = head;
         while (current != null) {
-            if (current.compareTo((Node) obj) == 0) {
+            if (current.val.compareTo(obj) == 0) {
                 return true;
             }
             current = current.next;
@@ -51,45 +51,45 @@ public class List implements Iterable<List.Node> {
 
     public void clear() {
         head = null;
-    }
+    }*/
 
     public ListIterator iterator() {
         return new ListIterator(this);
     }
 
-    private static class ListIterator implements Iterator<Node> {
-        private Node current;
+    private class ListIterator implements Iterator<Integer> {
+        private Node next;
 
         @Contract(pure = true)
-        public ListIterator(@NotNull List current) {
-            this.current = current.head;
+        public ListIterator(@NotNull List list) {
+            this.next = head;
         }
 
         public boolean hasNext() {
-            return this.current != null;
+            return this.next != null;
         }
 
-        public Node next() {
-            Node n = this.current;
-            this.current = this.current.next;
-            return n;
+        public Integer next() {
+            Node n = this.next;
+            this.next = this.next.next;
+            return n.val;
         }
 
         public void remove() {
-            this.current.remove();
+            this.next.remove();
         }
     }
 
-    public static final class Node implements Comparable<Node> {
-        private final int val;
+    private static final class Node implements Comparable<Integer> {
+        private final Integer val;
         private Node next;
 
-        public Node(int val, Node next) {
+        public Node(Integer val, Node next) {
             this.val = val;
             this.next = next;
         }
 
-        public Node(int val) {
+        public Node(Integer val) {
             this(val, null);
         }
 
@@ -112,8 +112,8 @@ public class List implements Iterable<List.Node> {
         }
 
         @Override
-        public int compareTo(@NotNull List.Node o) {
-            return this.val - o.val;
+        public int compareTo(@NotNull Integer o) {
+            return this.val - o;
         }
     }
 }

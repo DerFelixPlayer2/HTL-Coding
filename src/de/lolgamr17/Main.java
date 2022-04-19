@@ -9,10 +9,10 @@ public class Main {
 
         List l = new List();
 
-        l.add(new List.Node(3));
-        l.add(new List.Node(2));
-        l.add(new List.Node(4));
-        l.add(new List.Node(1));
+        l.add(3);
+        l.add(2);
+        l.add(4);
+        l.add(1);
 
         l.print();
 
