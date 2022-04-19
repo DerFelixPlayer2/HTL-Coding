@@ -1,20 +1,50 @@
 package de.lolgamr17;
 
 import de.lolgamr17.interfaces.List;
+import de.lolgamr17.interfaces.state_debt.State;
+import de.lolgamr17.interfaces.state_debt.StateList;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        List l = new List();
+
+
+
+
+        /*StateList stateList = new StateList();
+        Scanner s = new Scanner(Path.of("EU_Debts.txt"));
+        while (s.hasNext()) {
+            stateList.insert(s.next(), s.nextDouble());
+        }
+
+        for (State state : stateList) {
+            System.out.println(state.getName() + ": " + state.getDebt());
+        }
+
+        System.out.println(StateList.upTo(stateList, 25D));
+        System.out.println(StateList.between(stateList, 25D, 50D));
+        System.out.println(StateList.between(stateList, 50D, 75D));
+        System.out.println(StateList.between(stateList, 75D, 100D));
+        System.out.println(StateList.between(stateList, 100D, 125D));
+        System.out.println(StateList.greaterThan(stateList, 125D));*/
+
+
+
+
+
+        /*List l = new List();
 
         l.add(3);
         l.add(2);
         l.add(4);
         l.add(1);
 
-        l.print();
+        l.print();*/
 
 
         //Random rand = new Random();
