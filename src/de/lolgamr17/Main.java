@@ -1,18 +1,33 @@
 package de.lolgamr17;
 
-import de.lolgamr17.interfaces.List;
+import de.lolgamr17.interfaces.Top100.Person;
+import de.lolgamr17.interfaces.Top100.SortedList;
 import de.lolgamr17.interfaces.state_debt.State;
 import de.lolgamr17.interfaces.state_debt.StateList;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
+        SortedList list = new SortedList();
+        Scanner s = new Scanner(Path.of("Top100.txt"));
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] split = line.split("\"");
+            List<String> l = Arrays.stream(split).map(String::trim).toList();
 
+            list.insert(l.get(1), Long.parseLong(l.get(2)));
+        }
+
+        for (Person person : list) {
+            System.out.println(person);
+        }
 
 
 
