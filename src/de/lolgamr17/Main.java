@@ -2,6 +2,8 @@ package de.lolgamr17;
 
 import de.lolgamr17.interfaces.Top100.Person;
 import de.lolgamr17.interfaces.Top100.SortedList;
+import de.lolgamr17.interfaces.dictionary.Dictionary;
+import de.lolgamr17.interfaces.dictionary.Entry;
 import de.lolgamr17.interfaces.state_debt.State;
 import de.lolgamr17.interfaces.state_debt.StateList;
 
@@ -15,7 +17,26 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        SortedList list = new SortedList();
+        Dictionary dictionary = new Dictionary();
+        Scanner s = new Scanner(System.in);
+        String line;
+        while (!(line = s.nextLine()).equals(".")) {
+            String[] split = line.split(" ");
+            dictionary.insert(split[0], split[1]);
+        }
+
+        line = s.nextLine();
+        String[] split = line.split(" ");
+        for (String w : split) {
+            System.out.print(dictionary.lookupGermanWord(w) + " ");
+        }
+
+
+        /*for (Entry e : dictionary) {
+            System.out.println(e);
+        }*/
+
+        /*SortedList list = new SortedList();
         Scanner s = new Scanner(Path.of("Top100.txt"));
         while (s.hasNext()) {
             String line = s.nextLine();
@@ -27,7 +48,7 @@ public class Main {
 
         for (Person person : list) {
             System.out.println(person);
-        }
+        }*/
 
 
 
