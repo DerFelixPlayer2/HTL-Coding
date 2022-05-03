@@ -2,16 +2,11 @@ package de.lolgamr17;
 
 import de.lolgamr17.interfaces.Top100.Person;
 import de.lolgamr17.interfaces.Top100.SortedList;
-import de.lolgamr17.interfaces.dictionary.Dictionary;
-import de.lolgamr17.interfaces.dictionary.Entry;
-import de.lolgamr17.interfaces.state_debt.State;
-import de.lolgamr17.interfaces.state_debt.StateList;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -29,12 +24,11 @@ public class Main {
         String[] split = line.split(" ");
         for (String w : split) {
             System.out.print(dictionary.lookupGermanWord(w) + " ");
-        }*/
+        }
 
-
-        /*for (Entry e : dictionary) {
+        for (Entry e : dictionary) {
             System.out.println(e);
-        }*/
+        }/**/
 
         SortedList list = new SortedList();
         Scanner s = new Scanner(Path.of("Top100.txt"));
@@ -55,8 +49,6 @@ public class Main {
         for (Person person : subList) {
             System.out.println(person);
         }/**/
-
-
 
         /*StateList stateList = new StateList();
         Scanner s = new Scanner(Path.of("EU_Debts.txt"));
