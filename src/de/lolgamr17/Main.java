@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        Dictionary dictionary = new Dictionary();
+        /*Dictionary dictionary = new Dictionary();
         Scanner s = new Scanner(System.in);
         String line;
         while (!(line = s.nextLine()).equals(".")) {
@@ -29,14 +29,14 @@ public class Main {
         String[] split = line.split(" ");
         for (String w : split) {
             System.out.print(dictionary.lookupGermanWord(w) + " ");
-        }
+        }*/
 
 
         /*for (Entry e : dictionary) {
             System.out.println(e);
         }*/
 
-        /*SortedList list = new SortedList();
+        SortedList list = new SortedList();
         Scanner s = new Scanner(Path.of("Top100.txt"));
         while (s.hasNext()) {
             String line = s.nextLine();
@@ -48,7 +48,13 @@ public class Main {
 
         for (Person person : list) {
             System.out.println(person);
-        }*/
+        }
+
+        System.out.println("\n------------ between 100m and 500m ------------\n");
+        SortedList subList = list.sublist(100000000, 500000000);
+        for (Person person : subList) {
+            System.out.println(person);
+        }/**/
 
 
 

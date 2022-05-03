@@ -1,6 +1,7 @@
 package de.lolgamr17.interfaces.Top100;
 
 import de.lolgamr17.interfaces.state_debt.StateList;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -56,6 +57,17 @@ public class SortedList implements Iterable<Person> {
             current = current.next;
         }
         return current.person;
+    }
+
+    @Contract(pure = true)
+    public SortedList sublist(long min, long max) {
+        SortedList sublist = new SortedList();
+        for (Person person : this) {
+            if (person.getMoney() >= min && person.getMoney() <= max) {
+                sublist.insert(person);
+            }
+        }
+        return sublist;
     }
 
     @NotNull
