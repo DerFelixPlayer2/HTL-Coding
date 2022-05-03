@@ -1,5 +1,6 @@
 package de.lolgamr17;
 
+import de.lolgamr17.interfaces.DataSet;
 import de.lolgamr17.interfaces.Top100.Person;
 import de.lolgamr17.interfaces.Top100.SortedList;
 
@@ -11,6 +12,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
+        DataSet ds = new DataSet(4);
+        ds.add(1);
+        ds.add(2);
+        ds.add(3);
+        ds.add(4);
+        for (Object o : ds) {
+            System.out.println(o);
+        }/**/
 
         /*Dictionary dictionary = new Dictionary();
         Scanner s = new Scanner(System.in);
@@ -30,7 +40,7 @@ public class Main {
             System.out.println(e);
         }/**/
 
-        SortedList list = new SortedList();
+        /*SortedList list = new SortedList();
         Scanner s = new Scanner(Path.of("Top100.txt"));
         while (s.hasNext()) {
             String line = s.nextLine();
