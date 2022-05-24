@@ -1,19 +1,19 @@
 package de.lolgamr17;
 
 import de.lolgamr17.interfaces.DataSet;
+import de.lolgamr17.interfaces.List;
 import de.lolgamr17.interfaces.Top100.Person;
 import de.lolgamr17.interfaces.Top100.SortedList;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        DataSet ds = new DataSet(4);
+        /*DataSet ds = new DataSet(4);
         ds.add(1);
         ds.add(2);
         ds.add(3);
@@ -78,17 +78,23 @@ public class Main {
         System.out.println(StateList.greaterThan(stateList, 125D));*/
 
 
-
-
-
-        /*List l = new List();
+        /*List<Integer> l = new List<>();
 
         l.add(3);
         l.add(2);
         l.add(4);
         l.add(1);
 
-        l.print();*/
+        l.print();/**/
+
+        /*List<String> l = new List<>();
+
+        l.add("adg");
+        l.add("dfvhsfg");
+        l.add("tnkdbjhytv");
+        l.add("1ersvgca");
+
+        l.print();/**/
 
 
         //Random rand = new Random();
