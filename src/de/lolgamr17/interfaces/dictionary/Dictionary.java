@@ -46,35 +46,29 @@ public class Dictionary implements Iterable<Entry> {
     @NotNull
     @Override
     public Iterator<Entry> iterator() {
-        return new DictionaryIterator();
+        return new Iterator<>() {
+            private Node next = head;
+
+            public boolean hasNext() {
+                return next != null;
+            }
+
+            @Override
+            public Entry next() {
+                Node n = this.next;
+                this.next = this.next.next;
+                return n.entry;
+            }
+
+            public void remove() {
+                this.next.remove();
+            }
+        };
     }
 
     @Override
     public String toString() {
         return head.toString();
-    }
-
-    private class DictionaryIterator implements Iterator<Entry> {
-        private Node next;
-
-        public DictionaryIterator() {
-            next = head;
-        }
-
-        public boolean hasNext() {
-            return next != null;
-        }
-
-        @Override
-        public Entry next() {
-            Node n = this.next;
-            this.next = this.next.next;
-            return n.entry;
-        }
-
-        public void remove() {
-            this.next.remove();
-        }
     }
 
     private static final class Node implements Comparable<Entry> {
