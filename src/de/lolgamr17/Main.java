@@ -2,6 +2,7 @@ package de.lolgamr17;
 
 import de.lolgamr17.interfaces.DataSet;
 import de.lolgamr17.interfaces.List;
+import de.lolgamr17.interfaces.Tokenizer;
 import de.lolgamr17.interfaces.Top100.Person;
 import de.lolgamr17.interfaces.Top100.SortedList;
 
@@ -12,6 +13,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
+
+
+/*
+        Tokenizer tokenizer = new Tokenizer("Hello World! How are you?");
+        for (String e : tokenizer) System.out.println(e);/**/
 
         /*DataSet ds = new DataSet(4);
         ds.add(1);
