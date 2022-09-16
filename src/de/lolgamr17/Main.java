@@ -1,5 +1,6 @@
 package de.lolgamr17;
 
+import de.lolgamr17.FSST.exceptions.Stack;
 import de.lolgamr17.interfaces.DataSet;
 import de.lolgamr17.interfaces.List;
 import de.lolgamr17.interfaces.Tokenizer;
@@ -14,7 +15,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-
+    Stack stack = new Stack(3);
+    try {
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+    } catch (Stack.StackOverflowException e) {
+        System.out.println(e.getMessage());
+    }
 
 /*
         Tokenizer tokenizer = new Tokenizer("Hello World! How are you?");
