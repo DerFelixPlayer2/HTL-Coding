@@ -1,4 +1,4 @@
-package de.lolgamr17.interfaces.shapes;
+package de.lolgamr17.FSST.interfaces.shapes;
 
 public abstract class Shape {
     protected final int x;

@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.extension.Tickets;
+package de.lolgamr17.FSST.classes.extension.Tickets;
 
 public class Walk_Up_Ticket extends Ticket {
     public Walk_Up_Ticket(int number) {

@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.abstraction.Arithmetic;
+package de.lolgamr17.FSST.classes.abstraction.Arithmetic;
 
 import org.jetbrains.annotations.NotNull;
 

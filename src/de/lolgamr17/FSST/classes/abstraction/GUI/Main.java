@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.abstraction.GUI;
+package de.lolgamr17.FSST.classes.abstraction.GUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;

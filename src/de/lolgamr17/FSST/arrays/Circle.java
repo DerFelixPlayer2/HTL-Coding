@@ -1,4 +1,4 @@
-package de.lolgamr17.arrays;
+package de.lolgamr17.FSST.arrays;
 
 public class Circle {
     final int x, y;

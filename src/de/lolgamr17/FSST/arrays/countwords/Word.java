@@ -1,4 +1,4 @@
-package de.lolgamr17.arrays.countwords;
+package de.lolgamr17.FSST.arrays.countwords;
 
 public class Word {
     private final String word;

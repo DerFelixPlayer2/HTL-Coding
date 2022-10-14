@@ -1,4 +1,4 @@
-package de.lolgamr17.arrays.countwords;
+package de.lolgamr17.FSST.arrays.countwords;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

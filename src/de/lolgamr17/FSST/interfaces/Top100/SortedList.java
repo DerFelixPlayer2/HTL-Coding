@@ -1,6 +1,5 @@
-package de.lolgamr17.interfaces.Top100;
+package de.lolgamr17.FSST.interfaces.Top100;
 
-import de.lolgamr17.interfaces.state_debt.StateList;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

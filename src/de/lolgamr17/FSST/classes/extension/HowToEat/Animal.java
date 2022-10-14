@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.extension.HowToEat;
+package de.lolgamr17.FSST.classes.extension.HowToEat;
 
 public class Animal {
     int weight;

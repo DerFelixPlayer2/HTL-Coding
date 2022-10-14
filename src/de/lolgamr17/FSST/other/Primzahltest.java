@@ -1,4 +1,4 @@
-package de.lolgamr17.other;
+package de.lolgamr17.FSST.other;
 
 import java.util.Scanner;
 

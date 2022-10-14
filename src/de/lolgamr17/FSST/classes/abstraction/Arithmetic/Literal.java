@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.abstraction.Arithmetic;
+package de.lolgamr17.FSST.classes.abstraction.Arithmetic;
 
 public class Literal extends Expression {
     private final int value;

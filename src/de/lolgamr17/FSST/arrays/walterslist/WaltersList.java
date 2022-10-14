@@ -1,4 +1,4 @@
-package de.lolgamr17.arrays.walterslist;
+package de.lolgamr17.FSST.arrays.walterslist;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

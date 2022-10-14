@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.extension.Newsfeed;
+package de.lolgamr17.FSST.classes.extension.Newsfeed;
 
 public class PhotoPost extends Post {
     private final String filename;

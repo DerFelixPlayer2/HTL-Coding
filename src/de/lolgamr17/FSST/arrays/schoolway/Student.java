@@ -1,4 +1,4 @@
-package de.lolgamr17.arrays.schoolway;
+package de.lolgamr17.FSST.arrays.schoolway;
 
 import org.jetbrains.annotations.NotNull;
 

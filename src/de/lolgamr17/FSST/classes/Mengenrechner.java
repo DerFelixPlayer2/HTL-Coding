@@ -1,9 +1,8 @@
-package de.lolgamr17.classes;
+package de.lolgamr17.FSST.classes;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 

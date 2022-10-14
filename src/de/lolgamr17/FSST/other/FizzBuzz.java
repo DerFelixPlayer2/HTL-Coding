@@ -1,4 +1,4 @@
-package de.lolgamr17.other;
+package de.lolgamr17.FSST.other;
 
 public class FizzBuzz {
     public static void main(String[] args) {

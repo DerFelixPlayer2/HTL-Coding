@@ -1,4 +1,4 @@
-package de.lolgamr17.classes;
+package de.lolgamr17.FSST.classes;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -1,9 +1,4 @@
-package de.lolgamr17.projects.GUI;
-
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
+package de.lolgamr17.FSST.projects.GUI;
 
 public class PolyLine {
     /*@NotNull

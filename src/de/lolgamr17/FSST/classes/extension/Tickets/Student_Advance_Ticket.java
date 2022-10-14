@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.extension.Tickets;
+package de.lolgamr17.FSST.classes.extension.Tickets;
 
 public class Student_Advance_Ticket extends Advance_Ticket {
     public Student_Advance_Ticket(int number, int days) {

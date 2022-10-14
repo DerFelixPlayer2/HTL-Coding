@@ -1,4 +1,4 @@
-package de.lolgamr17.projects.GUI;
+package de.lolgamr17.FSST.projects.GUI;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;

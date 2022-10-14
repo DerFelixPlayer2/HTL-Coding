@@ -1,4 +1,4 @@
-package de.lolgamr17.interfaces.dictionary;
+package de.lolgamr17.FSST.interfaces.dictionary;
 
 public record Entry(String english, String german) {
     public String getEnglish() {

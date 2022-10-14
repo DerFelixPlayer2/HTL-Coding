@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.extension.Tickets;
+package de.lolgamr17.FSST.classes.extension.Tickets;
 
 public class Advance_Ticket extends Ticket {
     protected int price;

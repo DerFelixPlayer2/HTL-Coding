@@ -1,4 +1,4 @@
-package de.lolgamr17.strings;
+package de.lolgamr17.FSST.strings;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.abstraction.Stromversorgung;
+package de.lolgamr17.FSST.classes.abstraction.Stromversorgung;
 
 public final class Cable extends Socket {
     private Device connection;

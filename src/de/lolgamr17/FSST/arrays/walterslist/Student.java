@@ -1,4 +1,4 @@
-package de.lolgamr17.arrays.walterslist;
+package de.lolgamr17.FSST.arrays.walterslist;
 
 import java.util.Objects;
 

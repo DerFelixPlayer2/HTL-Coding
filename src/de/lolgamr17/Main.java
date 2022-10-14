@@ -1,16 +1,8 @@
 package de.lolgamr17;
 
 import de.lolgamr17.FSST.exceptions.Stack;
-import de.lolgamr17.interfaces.DataSet;
-import de.lolgamr17.interfaces.List;
-import de.lolgamr17.interfaces.Tokenizer;
-import de.lolgamr17.interfaces.Top100.Person;
-import de.lolgamr17.interfaces.Top100.SortedList;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {

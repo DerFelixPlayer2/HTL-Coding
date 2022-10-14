@@ -1,7 +1,5 @@
-package de.lolgamr17.interfaces.dictionary;
+package de.lolgamr17.FSST.interfaces.dictionary;
 
-import de.lolgamr17.interfaces.state_debt.State;
-import de.lolgamr17.interfaces.state_debt.StateList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;

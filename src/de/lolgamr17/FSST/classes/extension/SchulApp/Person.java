@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.extension.SchulApp;
+package de.lolgamr17.FSST.classes.extension.SchulApp;
 
 public class Person {
     private String firstName;

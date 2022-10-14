@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.abstraction.Stromversorgung;
+package de.lolgamr17.FSST.classes.abstraction.Stromversorgung;
 
 abstract public class Consumer extends Device {
     private final int consumption;

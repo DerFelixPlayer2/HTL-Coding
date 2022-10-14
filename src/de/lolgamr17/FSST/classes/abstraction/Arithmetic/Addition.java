@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.abstraction.Arithmetic;
+package de.lolgamr17.FSST.classes.abstraction.Arithmetic;
 
 public class Addition extends BinaryOperation {
     Addition(Expression left, Expression right) {

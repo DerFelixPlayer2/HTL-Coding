@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.abstraction.GUI;
+package de.lolgamr17.FSST.classes.abstraction.GUI;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

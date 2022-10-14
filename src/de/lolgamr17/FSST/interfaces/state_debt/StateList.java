@@ -1,14 +1,8 @@
-package de.lolgamr17.interfaces.state_debt;
+package de.lolgamr17.FSST.interfaces.state_debt;
 
-import com.sun.source.tree.Tree;
-import de.lolgamr17.interfaces.List;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class StateList implements Iterable<State> {
     private Node head;

@@ -1,4 +1,4 @@
-package de.lolgamr17.arrays;
+package de.lolgamr17.FSST.arrays;
 
 public class Rectangle {
     final int x, y;

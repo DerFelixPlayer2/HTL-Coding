@@ -1,4 +1,4 @@
-package de.lolgamr17.interfaces.shapes;
+package de.lolgamr17.FSST.interfaces.shapes;
 
 import java.util.Set;
 

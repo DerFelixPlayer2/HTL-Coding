@@ -1,9 +1,8 @@
-package de.lolgamr17.generics;
+package de.lolgamr17.FSST.generics;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.Objects;
 
 public class mHashMap<S, V> {

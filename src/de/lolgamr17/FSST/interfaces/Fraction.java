@@ -1,4 +1,4 @@
-package de.lolgamr17.interfaces;
+package de.lolgamr17.FSST.interfaces;
 
 import org.jetbrains.annotations.NotNull;
 

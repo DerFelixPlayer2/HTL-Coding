@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.extension.Tickets;
+package de.lolgamr17.FSST.classes.extension.Tickets;
 
 public class TicketMain {
     public static void main(String[] args) {

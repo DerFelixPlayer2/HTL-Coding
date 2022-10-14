@@ -1,4 +1,4 @@
-package de.lolgamr17.strings;
+package de.lolgamr17.FSST.strings;
 
 public class SatzUndWort {
     private final String word;

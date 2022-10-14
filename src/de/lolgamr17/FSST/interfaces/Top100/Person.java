@@ -1,4 +1,4 @@
-package de.lolgamr17.interfaces.Top100;
+package de.lolgamr17.FSST.interfaces.Top100;
 
 public record Person(String name, long money) {
     public String getName() {

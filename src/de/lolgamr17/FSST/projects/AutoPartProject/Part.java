@@ -1,4 +1,4 @@
-package de.lolgamr17.projects.AutoPartProject;
+package de.lolgamr17.FSST.projects.AutoPartProject;
 
 public class Part {
     long id;

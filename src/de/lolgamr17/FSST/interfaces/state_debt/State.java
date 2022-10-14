@@ -1,4 +1,4 @@
-package de.lolgamr17.interfaces.state_debt;
+package de.lolgamr17.FSST.interfaces.state_debt;
 
 public record State(String name, double debt) {
     public String getName() {

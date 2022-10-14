@@ -1,4 +1,4 @@
-package de.lolgamr17.classes.abstraction.Stromversorgung;
+package de.lolgamr17.FSST.classes.abstraction.Stromversorgung;
 
 public final class PowerStrip extends Socket {
     private final int n;

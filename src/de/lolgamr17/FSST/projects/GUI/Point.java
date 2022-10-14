@@ -1,10 +1,8 @@
-package de.lolgamr17.projects.GUI;
+package de.lolgamr17.FSST.projects.GUI;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class Point {
