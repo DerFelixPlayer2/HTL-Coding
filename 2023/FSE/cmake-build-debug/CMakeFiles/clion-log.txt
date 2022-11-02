@@ -1,0 +1,4 @@
+C:\Users\felix\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\222.4345.21\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/felix/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/ninja/win/ninja.exe -G Ninja -S C:\Users\felix\Desktop\CodeProjects\IOI\2023\FSE -B C:\Users\felix\Desktop\CodeProjects\IOI\2023\FSE\cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/felix/Desktop/CodeProjects/IOI/2023/FSE/cmake-build-debug
