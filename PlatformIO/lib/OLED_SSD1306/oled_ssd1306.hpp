@@ -25,6 +25,9 @@ void oled_write_char(char c);
 void oled_write_str(char* str);
 void oled_write_P(const char* Buffer, ...);
 
+// Custom oled helper functions
+void oled_write_header(char* Buffer, ...);
+
 #define oled_write(format, args...) oled_write_P(PSTR(format), ##args)
 
 #define COMMAND 0x00

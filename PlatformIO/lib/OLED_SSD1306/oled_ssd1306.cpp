@@ -237,6 +237,14 @@ void oled_write_P(const char *Buffer, ...) {
 	va_end(ap);
 }
 
+//***************************************************************************************
+void oled_write_header(char *Buffer, ...) {
+	oled_gotoxy(0, 0);
+	oled_write_str(Buffer);
+	oled_gotoxy(0, 1);
+	oled_write("****************");
+}
+
 void OLED_SSD1306::main() {
 	DDRB |= (1 << PB5);
 	oled_init();
