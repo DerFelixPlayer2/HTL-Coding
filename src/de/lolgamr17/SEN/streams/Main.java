@@ -2,12 +2,24 @@ package de.lolgamr17.SEN.streams;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        nothingSpecial();
-        System.out.println("");
-        special();
+        // nothingSpecial();
+        // System.out.println("");
+        // special();
+
+
+
+        Stream.iterate(new long[]{0, 1}, t -> new long[]{t[1], t[0] + t[1]})
+                .map(t -> t[0]).limit(100).forEach(System.out::println);
+
+        Stream<Integer> posInts = Stream.iterate(1, x -> x + 1);
+        posInts.limit(5)
+                .flatMapToInt(i -> IntStream.iterate(1, j -> j + 1).limit(i))
+                .forEach(System.out::println);
     }
 
     private static void nothingSpecial() {
