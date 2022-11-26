@@ -10,12 +10,11 @@
 #include <string.h>
 #include <util/delay.h>
 
-#define SDA_PIN PC4
-#define SCL_PIN PC5
-#define I2C_PORT PORTC
+#include <I2C.hpp>
+
+#include "font.h"
 
 #define OLED_I2C_ADDR 0x78
-#define SCL_CLOCK 400000UL
 
 void oled_init(void);
 void oled_clear_screen(void);
