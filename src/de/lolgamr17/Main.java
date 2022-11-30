@@ -1,13 +1,18 @@
 package de.lolgamr17;
 
-import de.lolgamr17.FSST.exceptions.Stack;
-
-import java.io.IOException;
+import de.lolgamr17.FSST.threading.Doc;
+import de.lolgamr17.FSST.threading.WaitingRoom;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-    Stack stack = new Stack(3);
+        WaitingRoom w = new WaitingRoom();
+        new Doc(w, 1000).start();
+        new Doc(w, 900).start();
+
+        w.start();
+
+    /*Stack stack = new Stack(3);
     try {
         stack.push(1);
         stack.push(2);
@@ -15,7 +20,7 @@ public class Main {
         stack.push(4);
     } catch (Stack.StackOverflowException e) {
         System.out.println(e.getMessage());
-    }
+    }/**/
 
 /*
         Tokenizer tokenizer = new Tokenizer("Hello World! How are you?");
