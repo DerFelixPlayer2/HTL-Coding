@@ -1,121 +1,162 @@
 #include "scheune.h"
+#include <iostream>
+#include <chrono>
+#include <vector>
+#include <unordered_map>
 
 #ifdef DEV
-//#define USE_LOGS
+#define USE_LOGS
+#define USE_POINTS
 #define USE_VEC
 #define USE_TIME
 #endif
 
-#if defined(USE_LOGS) || defined(USE_TIME)
-#include <iostream>
-#endif
-
-#ifdef USE_TIME
-#include <chrono>
-#endif
-
 using namespace std;
 
-bool hasTree(vector<Point> &_trees, const int r, const int c) {
-	int l = 0, h = (int) _trees.size() - 1;
+constexpr inline int min(const int &a, const int &b, const int &c, const int &d) {
+	return min(min(a, b), min(c, d));
+}
 
-	while (l <= h) {
-		int m = (l + h) / 2;
-		if (_trees[m].r == r && _trees[m].c == c) {
-			_trees.erase(next(_trees.begin(), m));
+constexpr inline int max(const int &a, const int &b, const int &c, const int &d) {
+	return max(max(a, b), max(c, d));
+}
 
-#ifdef USE_LOGS
-			cout << "Found Point{" << r << ", " << c << "}" << endl;
-#endif
+bool hasTree(const int n, unordered_map<int, vector<int>> &trees, const int &r1, const int &c1, const int &r2,
+			 const int &c2) {
+	if (min(r1, r2, c1, c2) < 0 || max(r1, r2, c1, c2) > n + 1) return true;
 
+	for (int r = min(r1, r2) + 1; r < max(r1, r2); r++) {
+		if (trees[r].empty()) {
+			//cout << "e ";
+			continue;
+		}
+		if (trees[r].size() == 1 && trees[r][0] < max(c1, c2) && trees[r][0] > min(c1, c2)) {
+			//cout << "o ";
 			return true;
-		} else if (_trees[m].r < r || (_trees[m].r == r && _trees[m].c < c)) {
-			l = m + 1;
-		} else {
-			h = m - 1;
+		}
+
+		int l = 0, h = (int) trees[r].size() - 1;
+
+		while (l <= h) {
+			int m = (l + h) / 2;
+			if (trees[r][m] < max(c1, c2) && trees[r][m] > min(c1, c2)) {
+				//cout << "s ";
+				return true;
+			} else if (trees[r][m] < max(c1, c2)) {
+				l = m + 1;
+			} else {
+				h = m - 1;
+			}
 		}
 	}
 
 	return false;
 }
 
-int solve(int n, const vector<Point> &trees) {
+int solve(int n, const vector<Point> &_trees) {
 	if (n == 1) {
-		return trees.empty() ? 1 : 0; // Should always be 0
+		return _trees.empty() ? 1 : 0; // Should always be 0
 	}
 
 #if defined(USE_LOGS) || defined(USE_TIME)
 	ios_base::sync_with_stdio(false);
 #endif
 
-	vector<Point> _trees(trees.size());
-	copy(trees.begin(), trees.end(), _trees.begin());
-	sort(_trees.begin(), _trees.end(), [](const Point &a, const Point &b) {
-		return a.r == b.r ? a.c < b.c : a.r < b.r;
-	});
+	unordered_map<int, vector<int>> trees;
+	trees[0].insert(upper_bound(trees[0].begin(), trees[0].end(), 0), 0);
+	trees[0].insert(upper_bound(trees[0].begin(), trees[0].end(), n + 1), n + 1);
+	trees[n + 1].insert(upper_bound(trees[n + 1].begin(), trees[n + 1].end(), 0), 0);
+	trees[n + 1].insert(upper_bound(trees[n + 1].begin(), trees[n + 1].end(), n + 1), n + 1);
+	for (auto tree: _trees) {
+		trees[tree.r].insert(upper_bound(trees[tree.r].begin(), trees[tree.r].end(), tree.c), tree.c);
+	}
 
-	int max = 0;
-#ifdef USE_VEC
-	vector<int> h(n), v(n);
-	vector<int> v2(n - 1), h2(n - 1);
-#else
-	auto h = (int *) malloc(sizeof(int) * n), v = (int *) malloc(sizeof(int) * n);
-	int *v2 = (int *) malloc(sizeof(int) * n), *h2 = (int *) malloc(sizeof(int) * n);
-#endif
+
+	int largest = 0;
+
 #ifdef USE_TIME
 	auto start = chrono::high_resolution_clock::now();
 #endif
 
-	v[0] = hasTree(_trees, 1, 1) ? 0 : 1;
-	h[0] = v[0];
-	if (h[0] == 1) max = 1;
-	for (int i = 1; i < n; i++) {
-		v[i] = hasTree(_trees, i + 1, 1) ? 0 : 1;
-		h[i] = hasTree(_trees, 1, i + 1) ? 0 : 1;
-		if (v[i] == 1 || h[i] == 1) max = 1;
+	for (const auto &t1: trees) {
+		for (const auto &t2: trees) {
+			// if (j <= i) continue;
+
+			const int r1 = t1.first;
+			const int r2 = t2.first;
+
+			const int dr = abs(r1 - r2);
+			for (const int &c1: t1.second) {
+				for (const int &c2: t2.second) {
+					const int dc = abs(c1 - c2);
+					int sc = dc;
+					int sr = dr;
+
+					if (dr > dc) {
+						sr--;
+						sc++;
+					} else if (dc > dr) {
+						sr++;
+						sc--;
+					} else {
+						sr--;
+						sc--;
+					}
+
+
+					if (sc != sr) {
+						continue;
+					} else {
+						if (dr > dc) {
+							for (int c = min(c1, c2); c <= max(c1, c2); c++) {
+								if (!hasTree(n, trees, min(r1, r2), c, min(r1, r2) + sc + 1, c + sc + 1)) {
+									largest = max(dc, largest);
+								}
+							}
+						} else if (dc > dr) {
+							for (int r = max(r1, r2) - 1; r >= min(r1, r2) + 1; r--) {
+								if (!hasTree(n, trees, r, min(c1, c2), r + sc + 1, min(c1, c2) + sc + 1)) {
+									largest = max(dr, largest);
+								}
+							}
+						} else {
+							if (!hasTree(n, trees, r1, c1, r2, c2)) {
+								largest = max(dr, largest);
+							}
+						}
+					}
+/*
+					if (dc > dr) {
+						for (int i = r1 - dc; i <= r1 + dc; i++) {
+							if (!hasTree(n, trees, r1, c1, i, c2)) {
+								largest = std::largest(dc, largest);
+							}
+						}
+					} else if (dr > dc) {
+						for (int i = c1 - dr; i <= c1 + dr; i++) {
+							if (!hasTree(n, trees, r1, c1, r1, i)) {
+								largest = std::largest(dr, largest);
+							}
+						}
+					} else {
+
+
+
+
+						if (!hasTree(n, trees, r1, c1, r2, c2)) {
+							largest = std::largest(dr, largest);
+						}
+					}*/
+				}
+			}
+		}
 	}
 
 #ifdef USE_TIME
 	auto end = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 	cout << "Time taken by function: " << duration.count() << " microseconds" << endl;
-	start = chrono::high_resolution_clock::now();
 #endif
 
-	for (int i = 1; i < n; i++) {
-		if (!hasTree(_trees, i + 1, i + 1)) {
-			v2[0] = min(v[1], min(h[1], h[0])) + 1;
-			h2[0] = v2[0];
-			if (v2[0] > max) max = v2[0];
-		} else {
-			v2[0] = 0;
-			h2[0] = 0;
-		}
-
-		for (int j = 1; j < n - i; j++) {
-			if (!hasTree(_trees, j + 1 + i, i + 1)) {
-				v2[j] = min(v2[j - 1], min(v[j], v[j + 1])) + 1;
-				if (v2[j] > max) max = v2[j];
-			} else v2[j] = 0;
-			if (!hasTree(_trees, i + 1, j + 1 + i)) {
-				h2[j] = min(h2[j - 1], min(h[j], h[j + 1])) + 1;
-				if (h2[j] > max) max = h2[j];
-			} else h2[j] = 0;
-		}
-
-		auto tmp = v;
-		v = v2;
-		v2 = tmp;
-		tmp = h2;
-		h2 = h;
-		h = tmp;
-	}
-
-#ifdef USE_TIME
-	end = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::microseconds>(end - start);
-	cout << "Time taken by function: " << duration.count() << " microseconds" << endl;
-#endif
-
-	return max;
+	return largest;
 }

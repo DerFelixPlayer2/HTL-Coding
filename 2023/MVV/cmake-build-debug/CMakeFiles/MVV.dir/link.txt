@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/MVV.dir/grader.cpp.o CMakeFiles/MVV.dir/mvv.cpp.o -o MVV 
