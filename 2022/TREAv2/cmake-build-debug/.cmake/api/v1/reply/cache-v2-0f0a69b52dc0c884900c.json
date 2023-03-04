@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/TREAv2/cmake-build-debug"
+			"value" : "c:/Users/felix/Desktop/CodeProjects/IOI/2022/TREAv2/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -707,7 +707,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/TREAv2"
+			"value" : "C:/Users/felix/Desktop/CodeProjects/IOI/2022/TREAv2"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1327,7 +1327,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/TREAv2/cmake-build-debug"
+			"value" : "C:/Users/felix/Desktop/CodeProjects/IOI/2022/TREAv2/cmake-build-debug"
 		},
 		{
 			"name" : "TREA2_IS_TOP_LEVEL",
@@ -1351,7 +1351,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/felix/OneDrive - HTL Braunau/CodeProjects/CLionProjects/IOI/2022/TREAv2"
+			"value" : "C:/Users/felix/Desktop/CodeProjects/IOI/2022/TREAv2"
 		}
 	],
 	"kind" : "cache",

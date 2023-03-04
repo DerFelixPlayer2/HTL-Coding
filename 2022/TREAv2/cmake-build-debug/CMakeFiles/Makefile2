@@ -53,10 +53,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2"
+CMAKE_SOURCE_DIR = C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -80,14 +80,14 @@ clean: CMakeFiles/TREA2.dir/clean
 CMakeFiles/TREA2.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TREA2.dir\build.make CMakeFiles/TREA2.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TREA2.dir\build.make CMakeFiles/TREA2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles" --progress-num=1,2,3 "Built target TREA2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target TREA2"
 .PHONY : CMakeFiles/TREA2.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TREA2.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles" 3
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TREA2.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/TREA2.dir/rule
 
 # Convenience name for target.

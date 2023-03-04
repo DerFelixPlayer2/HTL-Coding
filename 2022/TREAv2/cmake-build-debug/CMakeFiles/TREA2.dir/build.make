@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2"
+CMAKE_SOURCE_DIR = C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/TREA2.dir/depend.make
@@ -71,30 +71,30 @@ include CMakeFiles/TREA2.dir/flags.make
 CMakeFiles/TREA2.dir/treasure.cpp.obj: CMakeFiles/TREA2.dir/flags.make
 CMakeFiles/TREA2.dir/treasure.cpp.obj: ../treasure.cpp
 CMakeFiles/TREA2.dir/treasure.cpp.obj: CMakeFiles/TREA2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TREA2.dir/treasure.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TREA2.dir/treasure.cpp.obj -MF CMakeFiles\TREA2.dir\treasure.cpp.obj.d -o CMakeFiles\TREA2.dir\treasure.cpp.obj -c "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\treasure.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TREA2.dir/treasure.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TREA2.dir/treasure.cpp.obj -MF CMakeFiles\TREA2.dir\treasure.cpp.obj.d -o CMakeFiles\TREA2.dir\treasure.cpp.obj -c C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\treasure.cpp
 
 CMakeFiles/TREA2.dir/treasure.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TREA2.dir/treasure.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\treasure.cpp" > CMakeFiles\TREA2.dir\treasure.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\treasure.cpp > CMakeFiles\TREA2.dir\treasure.cpp.i
 
 CMakeFiles/TREA2.dir/treasure.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TREA2.dir/treasure.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\treasure.cpp" -o CMakeFiles\TREA2.dir\treasure.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\treasure.cpp -o CMakeFiles\TREA2.dir\treasure.cpp.s
 
 CMakeFiles/TREA2.dir/grader.cpp.obj: CMakeFiles/TREA2.dir/flags.make
 CMakeFiles/TREA2.dir/grader.cpp.obj: ../grader.cpp
 CMakeFiles/TREA2.dir/grader.cpp.obj: CMakeFiles/TREA2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TREA2.dir/grader.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TREA2.dir/grader.cpp.obj -MF CMakeFiles\TREA2.dir\grader.cpp.obj.d -o CMakeFiles\TREA2.dir\grader.cpp.obj -c "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\grader.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TREA2.dir/grader.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TREA2.dir/grader.cpp.obj -MF CMakeFiles\TREA2.dir\grader.cpp.obj.d -o CMakeFiles\TREA2.dir\grader.cpp.obj -c C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\grader.cpp
 
 CMakeFiles/TREA2.dir/grader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TREA2.dir/grader.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\grader.cpp" > CMakeFiles\TREA2.dir\grader.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\grader.cpp > CMakeFiles\TREA2.dir\grader.cpp.i
 
 CMakeFiles/TREA2.dir/grader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TREA2.dir/grader.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\grader.cpp" -o CMakeFiles\TREA2.dir\grader.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\grader.cpp -o CMakeFiles\TREA2.dir\grader.cpp.s
 
 # Object files for target TREA2
 TREA2_OBJECTS = \
@@ -110,7 +110,7 @@ TREA2.exe: CMakeFiles/TREA2.dir/build.make
 TREA2.exe: CMakeFiles/TREA2.dir/linklibs.rsp
 TREA2.exe: CMakeFiles/TREA2.dir/objects1.rsp
 TREA2.exe: CMakeFiles/TREA2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable TREA2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable TREA2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TREA2.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -122,6 +122,6 @@ CMakeFiles/TREA2.dir/clean:
 .PHONY : CMakeFiles/TREA2.dir/clean
 
 CMakeFiles/TREA2.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2" "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2" "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug" "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug" "C:\Users\felix\OneDrive - HTL Braunau\CodeProjects\CLionProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles\TREA2.dir\DependInfo.cmake" --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2 C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2 C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug C:\Users\felix\Desktop\CodeProjects\IOI\2022\TREAv2\cmake-build-debug\CMakeFiles\TREA2.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/TREA2.dir/depend
 
