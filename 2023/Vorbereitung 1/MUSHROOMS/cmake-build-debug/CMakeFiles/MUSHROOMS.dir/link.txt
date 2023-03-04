@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/MUSHROOMS.dir/mushrooms.cpp.o CMakeFiles/MUSHROOMS.dir/stub.cpp.o -o MUSHROOMS 

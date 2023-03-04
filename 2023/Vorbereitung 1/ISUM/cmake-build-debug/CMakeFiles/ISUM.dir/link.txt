@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/ISUM.dir/ISUM.cpp.o CMakeFiles/ISUM.dir/grader.cpp.o -o ISUM 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/LINE.dir/main.cpp.o -o LINE 
