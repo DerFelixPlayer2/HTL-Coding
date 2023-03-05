@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "TOPO.exe"
-		},
-		{
-			"path" : "TOPO.pdb"
+			"path" : "TOPO"
 		}
 	],
 	"backtrace" : 1,
@@ -38,10 +35,10 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-g -fdiagnostics-color=always"
 				},
 				{
-					"fragment" : "-std=gnu++20"
+					"fragment" : "-std=gnu++2a"
 				}
 			],
 			"language" : "CXX",
@@ -71,16 +68,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "TOPO",
-	"nameOnDisk" : "TOPO.exe",
+	"nameOnDisk" : "TOPO",
 	"paths" : 
 	{
 		"build" : ".",

@@ -1,53 +1,62 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <queue>
 
 using namespace std;
 
-queue<int> q;
-vector<int> ans;
+vector<int> res;
 
-void bfs(int root, vector<vector<int>> &adj, vector<int> &visited) {
-	q.empty();
-	q.push(root);
+void bfs(vector<vector<int>> &adjacency_list, queue<int> &queue, vector<int> &incoming) {
+	while (!queue.empty()) {
+		int node = queue.front();
+		queue.pop();
 
-	while (!q.empty()) {
-		int cur = q.front();
-		q.pop();
-		if (visited[cur]) continue;
-		visited[cur]++;
-		for (int v: adj[cur]) {
-			//if (ans[v] == 0) {
-			ans.push_back(v);
-			q.push(v);
-			//}
+		res.push_back(node + 1);
+		//cout << (node + 1) << " ";
+		for (int i: adjacency_list[node]) {
+			incoming[i]--;
+
+			if (incoming[i] == 0) {
+				queue.push(i);
+			}
 		}
 	}
 }
 
-// Topological Sort
 int main() {
+	ios_base::sync_with_stdio(false);
+
 	int n, m;
 	cin >> n >> m;
-
-	vector<int> visited(n + 1, 0);
-	vector<vector<int>> adj(n + 1);
-	vector<vector<int>> rev(n + 1);
+	res.reserve(n);
+	vector<vector<int>> adjacency_list(n);
+	vector<int> incoming(n, 0);
 	for (int i = 0; i < m; i++) {
-		int u, v;
-		cin >> u >> v;
-		adj[u].push_back(v);
-		rev[v].push_back(u);
-	}
+		int item, k;
+		cin >> item >> k;
 
-	for (int i = 1; i <= n; i++) {
-		if (!visited[i]) {
-			bfs(i, adj, visited);
+		for (int j = 0; j < k; j++) {
+			int a;
+			cin >> a;
+
+			adjacency_list[a - 1].push_back(item - 1);
+			incoming[item - 1]++;
 		}
 	}
 
-	for (int i = 0; i < n; i++) {
-		cout << ans[i] << " ";
+	queue<int> q;
+	for (int i = 0; i < n; i++) if (incoming[i] == 0) q.push(i);
+	bfs(adjacency_list, q, incoming);
+	for (auto v: incoming) {
+		if (v != 0) {
+			cout << -1 << endl;
+			return 0;
+		}
 	}
-
+	for (auto v: res) {
+		cout << v << " ";
+	}
+	cout << endl;
 
 	return 0;
 }
