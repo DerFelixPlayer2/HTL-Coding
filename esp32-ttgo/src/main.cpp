@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#include "can.hpp"
+#include "esp_now_util.hpp"
 
-void setup() { can_setup(); }
+void setup() { esp_now_setup(); }
 
-void loop() { can_loop(); }
+void loop() { esp_now_loop(); }
