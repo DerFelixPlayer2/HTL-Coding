@@ -1,5 +1,6 @@
 package de.lolgamr17.FSST.projects.MagicMarbles.model;
 
+import de.lolgamr17.FSST.projects.MagicMarbles.mvc.MMModel;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Random;
@@ -13,6 +14,7 @@ public class MMGameImpl implements MMGame {
     private final MMFieldState[][] field;
     private MMState state;
     private int score;
+    private final MMModel model;
 
     /**
      * Constructor
@@ -20,9 +22,10 @@ public class MMGameImpl implements MMGame {
      * @param width  the width of the game board
      * @param height the height of the game board
      */
-    public MMGameImpl(int width, int height) {
+    public MMGameImpl(int width, int height, MMModel model) {
         this.height = height;
         this.width = width;
+        this.model = model;
 
         field = new MMFieldState[height][width];
         final Random r = new Random();
@@ -86,6 +89,8 @@ public class MMGameImpl implements MMGame {
                     c += getFieldState(_row, _col) == MMFieldState.EMPTY ? 0 : 1;
             score -= c;
         }
+
+        model.updateField(this);
     }
 
     @Contract(pure = true)
@@ -150,7 +155,7 @@ public class MMGameImpl implements MMGame {
     private boolean removeEmptyCols() {
         boolean moved = false;
         for (int col = getWidth() - 1; col >= 0; col--) {
-            if (getFieldState(4, col) == MMFieldState.EMPTY) {
+            if (getFieldState(getHeight() - 1, col) == MMFieldState.EMPTY) {
                 for (int _col = col - 1; _col >= 0; _col--) {
                     for (int row = 0; row < getHeight(); row++) {
                         if (field[row][_col] != MMFieldState.EMPTY) moved = true;
