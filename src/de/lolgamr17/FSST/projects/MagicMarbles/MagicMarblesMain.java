@@ -4,18 +4,18 @@ import de.lolgamr17.FSST.projects.MagicMarbles.gui.GUI;
 import de.lolgamr17.FSST.projects.MagicMarbles.model.*;
 import de.lolgamr17.FSST.projects.MagicMarbles.mvc.MMModel;
 
-import java.awt.event.ActionEvent;
-
 public class MagicMarblesMain {
 
     private static MMModel model;
     private static GUI gui;
     private static MMGame field;
+    private static int rows = 10;
+    private static int cols = 10;
 
     public static void main(String[] args) {
         model = new MMModel();
-        field = new MMGameImpl(10, 10, model);
-        gui = new GUI(model);
+        field = new MMGameImpl(cols, rows, model);
+        gui = new GUI(model, cols, rows);
 
         model.updateField(field);
     }
@@ -29,8 +29,18 @@ public class MagicMarblesMain {
         }
     }
 
-    public static void onNewGame(ActionEvent ignored) {
-        field = new MMGameImpl(10, 10, model);
+    public static void onNewGame(int rows, int cols) {
+        if (rows != -1) {
+            MagicMarblesMain.rows = rows;
+        }
+        if (cols != -1) {
+            MagicMarblesMain.cols = cols;
+        }
+
+        model = new MMModel();
+        field = new MMGameImpl(MagicMarblesMain.cols, MagicMarblesMain.rows, model);
+        gui.close();
+        gui = new GUI(model, MagicMarblesMain.cols, MagicMarblesMain.rows);
         model.updateField(field);
     }
 }

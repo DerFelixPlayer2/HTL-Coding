@@ -12,29 +12,32 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.prefs.Preferences;
 
 public class GUI {
 
-    private static final int WIDTH = 450;
-    private static final int HEIGHT = 450;
+    private final int WIDTH;
+    private final int HEIGHT;
     private static final int MARBLE_SIZE = 35;
     private static final int MARBLE_GAP = 5;
     private static final int MARBLE_OFFSET_LEFT = 25;
     private static final int MARBLE_OFFSET_TOP = 25;
 
-    private JFrame frame;
-    private BufferedImage graphicsContext;
-    private JPanel contentPanel;
-    private JLabel contextRender;
-    private JPanel scorePanel;
-    private JLabel scoreLabel;
-    private JLabel highScoreLabel;
+    private final JFrame frame;
+    private final BufferedImage graphicsContext;
+    private final JPanel contentPanel;
+    private final JLabel contextRender;
+    private final JPanel scorePanel;
+    private final JLabel scoreLabel;
+    private final JLabel highScoreLabel;
     private MMModel model;
 
-    public GUI(@NotNull MMModel model) {
+    public GUI(@NotNull MMModel model, int cols, int rows) {
+        WIDTH = cols * (MARBLE_SIZE + MARBLE_GAP) + (2 * MARBLE_OFFSET_LEFT);
+        HEIGHT = rows * (MARBLE_SIZE + MARBLE_GAP) + (2 * MARBLE_OFFSET_TOP);
         setModel(model);
 
         frame = new JFrame("Magic Marbles");
@@ -44,8 +47,16 @@ public class GUI {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
-        JMenuItem newGameMenu = new JMenuItem("New Game");
-        newGameMenu.addActionListener(MagicMarblesMain::onNewGame);
+        JMenu newGameMenu = new JMenu("New Game");
+        JMenuItem size_current = new JMenuItem("Current");
+        size_current.addActionListener((ignored) -> MagicMarblesMain.onNewGame(-1, -1));
+        newGameMenu.add(size_current);
+        for (int i = 5; i <= 25; i += 5) {
+            JMenuItem item = new JMenuItem("%dx%d".formatted(i, i));
+            int finalI = i;
+            item.addActionListener((ignored) -> MagicMarblesMain.onNewGame(finalI, finalI));
+            newGameMenu.add(item);
+        }
         fileMenu.add(newGameMenu);
         JMenuItem exitMenu = new JMenuItem("Exit");
         exitMenu.addActionListener(e -> System.exit(0));
@@ -73,7 +84,13 @@ public class GUI {
         contentPanel.add(scorePanel, BorderLayout.SOUTH);
 
         frame.add(contentPanel);
+        frame.addKeyListener(new KeyListener());
         frame.setVisible(true);
+    }
+
+    public void close() {
+//        frame.setVisible(false);
+        frame.dispose();
     }
 
     public void setModel(@NotNull MMModel model) {
@@ -83,9 +100,10 @@ public class GUI {
             updateScore(e.getGame().getGamePoints());
             if (e.getGame().getGameState() == MMState.END) {
                 int result = JOptionPane.showConfirmDialog(frame, "Game Over!\nYour score: " + e.getGame().getGamePoints() +
-                        "\nDo you want to start a new game?", "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                                "\nDo you want to start a new game with the same size?", "Game Over", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
                 if (result == 0) {
-                    MagicMarblesMain.onNewGame(null);
+                    MagicMarblesMain.onNewGame(-1, -1);
                 }
             }
 
@@ -169,6 +187,29 @@ public class GUI {
         @Override
         public void mouseMoved(MouseEvent e) {
 
+        }
+    }
+
+    private static class KeyListener implements java.awt.event.KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            int key = (int) e.getKeyChar() - (int) '0';
+
+            if (e.getKeyChar() == 'n' || key == 0) {
+                MagicMarblesMain.onNewGame(-1, -1);
+            } else if (key <= 5) {
+                MagicMarblesMain.onNewGame(key * 5, key * 5);
+            }
         }
     }
 }
