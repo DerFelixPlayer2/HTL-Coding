@@ -57,7 +57,7 @@ public class GUI {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenu newGameMenu = new JMenu("New Game");
-        JMenuItem size_current = new JMenuItem("Current");
+        JMenuItem size_current = new JMenuItem("Current (n)");
         size_current.addActionListener((ignored) -> model.newGame(-1, -1));
         newGameMenu.add(size_current);
         for (int i = 5; i <= 25; i += 5) {
@@ -66,6 +66,9 @@ public class GUI {
             item.addActionListener((ignored) -> model.newGame(finalI, finalI));
             newGameMenu.add(item);
         }
+        JMenuItem size_custom = new JMenuItem("Custom (c)");
+        size_custom.addActionListener((ignored) -> newCustomGame());
+        newGameMenu.add(size_custom);
         fileMenu.add(newGameMenu);
         JMenuItem exitMenu = new JMenuItem("Exit");
         exitMenu.addActionListener(e -> System.exit(0));
@@ -98,7 +101,7 @@ public class GUI {
         graphicsContext.getGraphics().fillRect(0, 0, WIDTH, HEIGHT);
         for (int i = 0; i < field.getHeight(); i++) {
             for (int j = 0; j < field.getWidth(); j++) {
-                drawFigure(i, j, field.getFieldState(j, i));
+                drawFigure(j, i, field.getFieldState(i, j));
             }
         }
         contentPanel.repaint();
@@ -127,6 +130,23 @@ public class GUI {
             case BLUE -> Color.BLUE;
             default -> Color.WHITE;
         };
+    }
+
+    private void newCustomGame() {
+        String input = JOptionPane.showInputDialog(frame, "Enter the size of the game board (e.g. 10x10)", "Custom Game", JOptionPane.QUESTION_MESSAGE);
+        if (input == null) return;
+        String[] split = input.split("x");
+        if (split.length != 2) {
+            JOptionPane.showMessageDialog(frame, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            int width = Integer.parseInt(split[0]);
+            int height = Integer.parseInt(split[1]);
+            model.newGame(height, width);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(frame, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private class MouseListener implements MouseInputListener {
@@ -184,7 +204,9 @@ public class GUI {
 
             if (e.getKeyChar() == 'n' || key == 0) {
                 model.newGame(-1, -1);
-            } else if (key <= 5) {
+            } else if (e.getKeyChar() == 'c') {
+                newCustomGame();
+            } else if (key > 0 && key <= 5) {
                 model.newGame(key * 5, key * 5);
             }
         }

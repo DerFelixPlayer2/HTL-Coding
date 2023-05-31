@@ -110,10 +110,10 @@ public class MMGameImpl implements MMGame {
 
     @Contract(pure = true)
     private int countConnected(int row, int col) {
-        MMFieldState[][] field = new MMFieldState[this.getWidth()][this.getHeight()];
+        MMFieldState[][] field = new MMFieldState[this.getHeight()][this.getWidth()];
         for (int i = 0; i < this.getWidth(); i++)
             for (int j = 0; j < this.getHeight(); j++)
-                field[i][j] = this.getFieldState(i, j);
+                field[j][i] = this.getFieldState(j, i);
 
         return _countConnected(row, col, field);
     }
@@ -121,8 +121,6 @@ public class MMGameImpl implements MMGame {
     private int _countConnected(int row, int col, MMFieldState[][] field) {
         final MMFieldState state = field[row][col];
         field[row][col] = MMFieldState.EMPTY;
-
-//        System.out.println("Checking " + row + ", " + col + " for " + state);
 
         int count = 1;
         if (row > 0 && field[row - 1][col] == state)
