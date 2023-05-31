@@ -1,6 +1,6 @@
 package de.lolgamr17.FSST.projects.MagicMarbles.model;
 
-import de.lolgamr17.FSST.projects.MagicMarbles.mvc.MMModel;
+import de.lolgamr17.FSST.projects.MagicMarbles.mvc.*;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Random;
@@ -10,8 +10,8 @@ import java.util.Random;
  */
 public class MMGameImpl implements MMGame {
 
-    private final int width, height;
-    private final MMFieldState[][] field;
+    private int width, height;
+    private MMFieldState[][] field;
     private MMState state;
     private int score;
     private final MMModel model;
@@ -23,11 +23,22 @@ public class MMGameImpl implements MMGame {
      * @param height the height of the game board
      */
     public MMGameImpl(int width, int height, MMModel model) {
-        this.height = height;
-        this.width = width;
         this.model = model;
+        this.model.addListener(new Listener());
 
-        field = new MMFieldState[height][width];
+        reset(height, width);
+    }
+
+    public void reset(int rows, int cols) {
+        if (rows == -1) rows = this.height;
+        if (cols == -1) cols = this.width;
+
+        if (this.height != rows || this.width != cols) {
+            this.height = rows;
+            this.width = cols;
+            field = new MMFieldState[rows][cols];
+        }
+
         final Random r = new Random();
         for (int col = 0; col < width; col++)
             for (int row = 0; row < height; row++)
@@ -35,6 +46,9 @@ public class MMGameImpl implements MMGame {
 
         state = MMState.RUNNING;
         score = 0;
+
+        this.model.updateField(this);
+        this.model.updateScore(score);
     }
 
     @Override
@@ -91,6 +105,7 @@ public class MMGameImpl implements MMGame {
         }
 
         model.updateField(this);
+        model.updateScore(score);
     }
 
     @Contract(pure = true)
@@ -181,6 +196,32 @@ public class MMGameImpl implements MMGame {
                 }
             }
         return true;
+    }
+
+    private class Listener implements MMListener {
+        @Override
+        public void onUpdateField(MMFieldUpdateEvent evt) {
+
+        }
+
+        @Override
+        public void onUpdateScore(MMScoreUpdateEvent evt) {
+
+        }
+
+        @Override
+        public void onMarblePressed(MMMarblePressedEvent evt) {
+            try {
+                select(evt.getY(), evt.getX());
+            } catch (MMException e) {
+                System.out.printf(e.getMessage());
+            }
+        }
+
+        @Override
+        public void onNewGame(MMNewGameEvent evt) {
+            reset(evt.getRows(), evt.getCols());
+        }
     }
 
 }

@@ -18,6 +18,8 @@ public interface MMGame {
 	 */
 	int getHeight();
 
+	void reset(int rows, int cols);
+
 	/**
 	 * The overall state of the game.
 	 * 

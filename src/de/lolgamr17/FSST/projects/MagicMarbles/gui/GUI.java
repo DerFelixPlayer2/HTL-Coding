@@ -1,10 +1,9 @@
 package de.lolgamr17.FSST.projects.MagicMarbles.gui;
 
-import de.lolgamr17.FSST.projects.MagicMarbles.MagicMarblesMain;
 import de.lolgamr17.FSST.projects.MagicMarbles.model.MMFieldState;
 import de.lolgamr17.FSST.projects.MagicMarbles.model.MMGame;
 import de.lolgamr17.FSST.projects.MagicMarbles.model.MMState;
-import de.lolgamr17.FSST.projects.MagicMarbles.mvc.MMModel;
+import de.lolgamr17.FSST.projects.MagicMarbles.mvc.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,30 +14,40 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.prefs.Preferences;
 
 public class GUI {
 
-    private final int WIDTH;
-    private final int HEIGHT;
+    private int ROWS;
+    private int COLS;
+    private int WIDTH;
+    private int HEIGHT;
     private static final int MARBLE_SIZE = 35;
     private static final int MARBLE_GAP = 5;
     private static final int MARBLE_OFFSET_LEFT = 25;
     private static final int MARBLE_OFFSET_TOP = 25;
 
-    private final JFrame frame;
-    private final BufferedImage graphicsContext;
-    private final JPanel contentPanel;
-    private final JLabel contextRender;
-    private final JPanel scorePanel;
-    private final JLabel scoreLabel;
-    private final JLabel highScoreLabel;
-    private MMModel model;
+    private JFrame frame;
+    private BufferedImage graphicsContext;
+    private JPanel contentPanel;
+    private JLabel contextRender;
+    private JPanel scorePanel;
+    private JLabel scoreLabel;
+    private final MMModel model;
+    private final ModelListener listener;
 
     public GUI(@NotNull MMModel model, int cols, int rows) {
+        this.model = model;
+        this.listener = new ModelListener();
+        this.model.addListener(this.listener);
+
+        init(cols, rows);
+    }
+
+    private void init(int cols, int rows) {
+        ROWS = rows;
+        COLS = cols;
         WIDTH = cols * (MARBLE_SIZE + MARBLE_GAP) + (2 * MARBLE_OFFSET_LEFT);
         HEIGHT = rows * (MARBLE_SIZE + MARBLE_GAP) + (2 * MARBLE_OFFSET_TOP);
-        setModel(model);
 
         frame = new JFrame("Magic Marbles");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -49,12 +58,12 @@ public class GUI {
         JMenu fileMenu = new JMenu("File");
         JMenu newGameMenu = new JMenu("New Game");
         JMenuItem size_current = new JMenuItem("Current");
-        size_current.addActionListener((ignored) -> MagicMarblesMain.onNewGame(-1, -1));
+        size_current.addActionListener((ignored) -> model.newGame(-1, -1));
         newGameMenu.add(size_current);
         for (int i = 5; i <= 25; i += 5) {
             JMenuItem item = new JMenuItem("%dx%d".formatted(i, i));
             int finalI = i;
-            item.addActionListener((ignored) -> MagicMarblesMain.onNewGame(finalI, finalI));
+            item.addActionListener((ignored) -> model.newGame(finalI, finalI));
             newGameMenu.add(item);
         }
         fileMenu.add(newGameMenu);
@@ -70,13 +79,10 @@ public class GUI {
         contextRender.addMouseListener(new MouseListener());
 
         scoreLabel = new JLabel("Score: 0", SwingConstants.CENTER);
-        highScoreLabel = new JLabel("High Score: 0", SwingConstants.LEFT);
         scoreLabel.setFont(new Font("Roboto", Font.BOLD, 20));
-        highScoreLabel.setFont(new Font("Roboto", Font.BOLD, 20));
         scorePanel = new JPanel(new GridLayout(1, 2));
         scorePanel.setBorder(new EmptyBorder(0, 0, 5, 0));
         scorePanel.add(scoreLabel, BorderLayout.WEST);
-        scorePanel.add(highScoreLabel, BorderLayout.EAST);
 
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout());
@@ -86,28 +92,6 @@ public class GUI {
         frame.add(contentPanel);
         frame.addKeyListener(new KeyListener());
         frame.setVisible(true);
-    }
-
-    public void close() {
-//        frame.setVisible(false);
-        frame.dispose();
-    }
-
-    public void setModel(@NotNull MMModel model) {
-        this.model = model;
-        model.addListener(e -> {
-            drawField(e.getGame());
-            updateScore(e.getGame().getGamePoints());
-            if (e.getGame().getGameState() == MMState.END) {
-                int result = JOptionPane.showConfirmDialog(frame, "Game Over!\nYour score: " + e.getGame().getGamePoints() +
-                                "\nDo you want to start a new game with the same size?", "Game Over", JOptionPane.YES_NO_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE);
-                if (result == 0) {
-                    MagicMarblesMain.onNewGame(-1, -1);
-                }
-            }
-
-        });
     }
 
     private void drawField(@NotNull MMGame field) {
@@ -120,14 +104,8 @@ public class GUI {
         contentPanel.repaint();
     }
 
-    private void updateScore(int score) {
-        final Preferences preferences = Preferences.userRoot().node(this.getClass().getName());
-        final int highScore = Math.max(score, preferences.getInt("highScore", 0));
-
-        preferences.putInt("highScore", highScore);
-        highScoreLabel.setText("High Score: " + highScore);
+    private void updateScorePanel(int score) {
         scoreLabel.setText("Score: " + score);
-
         scorePanel.repaint();
     }
 
@@ -151,12 +129,11 @@ public class GUI {
         };
     }
 
-    private static class MouseListener implements MouseInputListener {
+    private class MouseListener implements MouseInputListener {
         @Override
         public void mouseClicked(MouseEvent e) {
-            // TODO: refine
-            MagicMarblesMain.onMarblePressed((e.getY() - MARBLE_OFFSET_TOP) / (MARBLE_SIZE + MARBLE_GAP),
-                    (e.getX() - MARBLE_OFFSET_LEFT) / (MARBLE_SIZE + MARBLE_GAP));
+            model.marblePressed((e.getX() - MARBLE_OFFSET_LEFT) / (MARBLE_SIZE + MARBLE_GAP),
+                    (e.getY() - MARBLE_OFFSET_TOP) / (MARBLE_SIZE + MARBLE_GAP));
         }
 
         @Override
@@ -190,7 +167,7 @@ public class GUI {
         }
     }
 
-    private static class KeyListener implements java.awt.event.KeyListener {
+    private class KeyListener implements java.awt.event.KeyListener {
         @Override
         public void keyTyped(KeyEvent e) {
 
@@ -206,9 +183,43 @@ public class GUI {
             int key = (int) e.getKeyChar() - (int) '0';
 
             if (e.getKeyChar() == 'n' || key == 0) {
-                MagicMarblesMain.onNewGame(-1, -1);
+                model.newGame(-1, -1);
             } else if (key <= 5) {
-                MagicMarblesMain.onNewGame(key * 5, key * 5);
+                model.newGame(key * 5, key * 5);
+            }
+        }
+    }
+
+    private class ModelListener implements MMListener {
+        @Override
+        public void onUpdateField(MMFieldUpdateEvent evt) {
+            drawField(evt.getGame());
+
+            if (evt.getGame().getGameState() == MMState.END) {
+                int result = JOptionPane.showConfirmDialog(frame, "Game Over!\nYour score: " + evt.getGame().getGamePoints() +
+                                "\nDo you want to start a new game with the same size?", "Game Over", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
+                if (result == 0) {
+                    model.newGame(-1, -1);
+                }
+            }
+        }
+
+        @Override
+        public void onUpdateScore(MMScoreUpdateEvent evt) {
+            updateScorePanel(evt.getScore());
+        }
+
+        @Override
+        public void onMarblePressed(MMMarblePressedEvent evt) {
+
+        }
+
+        @Override
+        public void onNewGame(MMNewGameEvent evt) {
+            if ((ROWS != evt.getRows() || COLS != evt.getCols()) && (evt.getRows() != -1 || evt.getCols() != -1)) {
+                frame.dispose();
+                init(evt.getCols(), evt.getRows());
             }
         }
     }
