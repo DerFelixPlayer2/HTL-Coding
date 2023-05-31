@@ -3,6 +3,8 @@ package de.lolgamr17.FSST.projects.MagicMarbles.model;
 import de.lolgamr17.FSST.projects.MagicMarbles.mvc.*;
 import org.jetbrains.annotations.Contract;
 
+import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.Random;
 
 /**
@@ -10,11 +12,11 @@ import java.util.Random;
  */
 public class MMGameImpl implements MMGame {
 
+    private final ArrayList<MMListener> listeners = new ArrayList<>();
     private int width, height;
     private MMFieldState[][] field;
     private MMState state;
     private int score;
-    private final MMModel model;
 
     /**
      * Constructor
@@ -22,10 +24,7 @@ public class MMGameImpl implements MMGame {
      * @param width  the width of the game board
      * @param height the height of the game board
      */
-    public MMGameImpl(int width, int height, MMModel model) {
-        this.model = model;
-        this.model.addListener(new Listener());
-
+    public MMGameImpl(int width, int height) {
         reset(height, width);
     }
 
@@ -47,8 +46,8 @@ public class MMGameImpl implements MMGame {
         state = MMState.RUNNING;
         score = 0;
 
-        this.model.updateField(this);
-        this.model.updateScore(score);
+        emit(new MMScoreUpdateEvent(this, score));
+        emit(new MMFieldUpdateEvent(this, field, state));
     }
 
     @Override
@@ -66,6 +65,10 @@ public class MMGameImpl implements MMGame {
         return state;
     }
 
+    public MMFieldState[][] getField() {
+        return field;
+    }
+
     @Override
     public int getGamePoints() {
         return score;
@@ -76,8 +79,7 @@ public class MMGameImpl implements MMGame {
         return this.field[row][col];
     }
 
-    @Override
-    public void select(int row, int col) throws MMException {
+    protected void select(int row, int col) throws MMException {
         if (row < 0 || row >= height || col < 0 || col >= width)
             throw new MMException("Field must be within bounds.");
         if (field[row][col] == MMFieldState.EMPTY)
@@ -104,8 +106,8 @@ public class MMGameImpl implements MMGame {
             score -= c;
         }
 
-        model.updateField(this);
-        model.updateScore(score);
+        emit(new MMScoreUpdateEvent(this, score));
+        emit(new MMFieldUpdateEvent(this, field, state));
     }
 
     @Contract(pure = true)
@@ -196,30 +198,29 @@ public class MMGameImpl implements MMGame {
         return true;
     }
 
-    private class Listener implements MMListener {
-        @Override
-        public void onUpdateField(MMFieldUpdateEvent evt) {
-
-        }
-
-        @Override
-        public void onUpdateScore(MMScoreUpdateEvent evt) {
-
-        }
-
-        @Override
-        public void onMarblePressed(MMMarblePressedEvent evt) {
-            try {
-                select(evt.getY(), evt.getX());
-            } catch (MMException e) {
-                System.out.printf(e.getMessage());
+    public void emit(EventObject e) throws IllegalArgumentException {
+        for (MMListener l : listeners) {
+            if (e.getClass().equals(MMFieldUpdateEvent.class)) {
+                l.onUpdateField((MMFieldUpdateEvent) e);
+            } else if (e.getClass().equals(MMScoreUpdateEvent.class)) {
+                l.onUpdateScore((MMScoreUpdateEvent) e);
+            } else if (e.getClass().equals(MMMarblePressedEvent.class)) {
+                l.onMarblePressed((MMMarblePressedEvent) e);
+            } else if (e.getClass().equals(MMNewGameEvent.class)) {
+                l.onNewGame((MMNewGameEvent) e);
+                reset(((MMNewGameEvent) e).getRows(), ((MMNewGameEvent) e).getCols());
+            } else {
+                throw new IllegalArgumentException("Unknown event type: " + e.getClass().getName());
             }
         }
+    }
 
-        @Override
-        public void onNewGame(MMNewGameEvent evt) {
-            reset(evt.getRows(), evt.getCols());
-        }
+    public void addListener(MMListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(MMListener listener) {
+        listeners.remove(listener);
     }
 
 }

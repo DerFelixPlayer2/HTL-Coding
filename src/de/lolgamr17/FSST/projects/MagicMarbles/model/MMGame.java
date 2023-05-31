@@ -1,9 +1,21 @@
 package de.lolgamr17.FSST.projects.MagicMarbles.model;
 
+import de.lolgamr17.FSST.projects.MagicMarbles.mvc.MMListener;
+
+import java.util.EventObject;
+
 /**
  * Definition of a magic marbles game.
  */
 public interface MMGame {
+
+	void addListener(MMListener listener);
+
+	void removeListener(MMListener listener);
+
+	void emit(EventObject e);
+
+
 	/**
 	 * Width of the game board, i.e. the number of columns.
 	 * 
@@ -33,6 +45,8 @@ public interface MMGame {
 	 * @return The game points.
 	 */
 	int getGamePoints();
+
+	MMFieldState[][] getField();
 	
 	/**
 	 * The state of an individual field.
@@ -44,19 +58,5 @@ public interface MMGame {
 	 * @return The state of the specified field.
 	 */
 	MMFieldState getFieldState(int row, int col);
-
-
-	/**
-	 * Selects the specified field. 
-	 * 
-	 * @param col
-	 *            The column of the field to select.
-	 * @param row
-	 *            The row of the field to select.
-	 * @throws MMException 
-	 *            when move is invalid. 
-	 */
-	void select(int row, int col) throws MMException;
-
 
 }
