@@ -46,6 +46,7 @@ public class MMGameImpl implements MMGame {
         state = MMState.RUNNING;
         score = 0;
 
+        emit(new MMNewGameEvent(this, width, height));
         emit(new MMScoreUpdateEvent(this, score));
         emit(new MMFieldUpdateEvent(this, field, state));
     }
@@ -79,7 +80,7 @@ public class MMGameImpl implements MMGame {
         return this.field[row][col];
     }
 
-    protected void select(int row, int col) throws MMException {
+    public void select(int row, int col) throws MMException {
         if (row < 0 || row >= height || col < 0 || col >= width)
             throw new MMException("Field must be within bounds.");
         if (field[row][col] == MMFieldState.EMPTY)
@@ -198,7 +199,7 @@ public class MMGameImpl implements MMGame {
         return true;
     }
 
-    public void emit(EventObject e) throws IllegalArgumentException {
+    private void emit(EventObject e) throws IllegalArgumentException {
         for (MMListener l : listeners) {
             if (e.getClass().equals(MMFieldUpdateEvent.class)) {
                 l.onUpdateField((MMFieldUpdateEvent) e);
@@ -208,7 +209,6 @@ public class MMGameImpl implements MMGame {
                 l.onMarblePressed((MMMarblePressedEvent) e);
             } else if (e.getClass().equals(MMNewGameEvent.class)) {
                 l.onNewGame((MMNewGameEvent) e);
-                reset(((MMNewGameEvent) e).getRows(), ((MMNewGameEvent) e).getCols());
             } else {
                 throw new IllegalArgumentException("Unknown event type: " + e.getClass().getName());
             }
@@ -217,10 +217,6 @@ public class MMGameImpl implements MMGame {
 
     public void addListener(MMListener listener) {
         listeners.add(listener);
-    }
-
-    public void removeListener(MMListener listener) {
-        listeners.remove(listener);
     }
 
 }

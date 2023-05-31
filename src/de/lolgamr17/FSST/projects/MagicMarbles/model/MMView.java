@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class GUI {
+public class MMView {
 
     private int ROWS;
     private int COLS;
@@ -29,14 +29,14 @@ public class GUI {
     private JLabel contextRender;
     private JPanel scorePanel;
     private JLabel scoreLabel;
-    private final MMGameImpl model;
+    private final MMGame game;
     private final ModelListener listener;
     private int score;
 
-    public GUI(@NotNull MMGameImpl model, int cols, int rows) {
-        this.model = model;
+    public MMView(@NotNull MMGame model, int cols, int rows) {
+        this.game = model;
         this.listener = new ModelListener();
-        this.model.addListener(this.listener);
+        this.game.addListener(this.listener);
 
         init(cols, rows);
     }
@@ -56,12 +56,12 @@ public class GUI {
         JMenu fileMenu = new JMenu("File");
         JMenu newGameMenu = new JMenu("New Game");
         JMenuItem size_current = new JMenuItem("Current (n)");
-        size_current.addActionListener((ignored) -> model.emit(new MMNewGameEvent(this, -1, -1)));
+        size_current.addActionListener((ignored) -> newGame(-1, -1));
         newGameMenu.add(size_current);
         for (int i = 5; i <= 25; i += 5) {
             JMenuItem item = new JMenuItem("%dx%d".formatted(i, i));
             int finalI = i;
-            item.addActionListener((ignored) -> model.emit(new MMNewGameEvent(this, finalI, finalI)));
+            item.addActionListener((ignored) -> newGame(finalI, finalI));
             newGameMenu.add(item);
         }
         JMenuItem size_custom = new JMenuItem("Custom (c)");
@@ -94,7 +94,11 @@ public class GUI {
         frame.addKeyListener(new KeyListener());
         frame.setVisible(true);
 
-        drawField(model.getField());
+        drawField(game.getField());
+    }
+
+    private void newGame(int rows, int cols) {
+        game.reset(rows, cols);
     }
 
     private void drawField(@NotNull MMFieldState[][] field) {
@@ -143,7 +147,7 @@ public class GUI {
         try {
             int width = Integer.parseInt(split[0]);
             int height = Integer.parseInt(split[1]);
-            model.emit(new MMNewGameEvent(this, height, width));
+            newGame(height, width);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(frame, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -153,7 +157,7 @@ public class GUI {
         @Override
         public void mouseClicked(MouseEvent e) {
             try {
-                model.select((e.getY() - MARBLE_OFFSET_TOP) / (MARBLE_SIZE + MARBLE_GAP),(e.getX() - MARBLE_OFFSET_LEFT) / (MARBLE_SIZE + MARBLE_GAP));
+                game.select((e.getY() - MARBLE_OFFSET_TOP) / (MARBLE_SIZE + MARBLE_GAP), (e.getX() - MARBLE_OFFSET_LEFT) / (MARBLE_SIZE + MARBLE_GAP));
             } catch (MMException ex) {
                 System.err.println(ex.getMessage());
             }
@@ -206,11 +210,11 @@ public class GUI {
             int key = (int) e.getKeyChar() - (int) '0';
 
             if (e.getKeyChar() == 'n' || key == 0) {
-                model.emit(new MMNewGameEvent(this, -1, -1));
+                newGame(-1, -1);
             } else if (e.getKeyChar() == 'c') {
                 newCustomGame();
             } else if (key > 0 && key <= 5) {
-                model.emit(new MMNewGameEvent(this, key * 5, key * 5));
+                newGame(key * 5, key * 5);
             }
         }
     }
@@ -218,22 +222,21 @@ public class GUI {
     private class ModelListener implements MMListener {
         @Override
         public void onUpdateField(MMFieldUpdateEvent evt) {
-            drawField(evt.getField());
+            drawField(game.getField());
 
-            if (evt.getState() == MMState.END) {
-                int result = JOptionPane.showConfirmDialog(frame, "Game Over!\nYour score: " + score +
+            if (game.getGameState() == MMState.END) {
+                int result = JOptionPane.showConfirmDialog(frame, "Game Over!\nYour score: " + game.getGamePoints() +
                                 "\nDo you want to start a new game with the same size?", "Game Over", JOptionPane.YES_NO_OPTION,
                         JOptionPane.INFORMATION_MESSAGE);
                 if (result == 0) {
-                    model.emit(new MMNewGameEvent(this, -1, -1));
+                    newGame(-1, -1);
                 }
             }
         }
 
         @Override
         public void onUpdateScore(MMScoreUpdateEvent evt) {
-            score = evt.getScore();
-            updateScorePanel(score);
+            updateScorePanel(game.getGamePoints());
         }
 
         @Override

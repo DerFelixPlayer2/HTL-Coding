@@ -2,6 +2,7 @@ package de.lolgamr17.FSST.projects.MagicMarbles.model;
 
 import de.lolgamr17.FSST.projects.MagicMarbles.mvc.MMListener;
 
+import java.io.IOException;
 import java.util.EventObject;
 
 /**
@@ -11,9 +12,7 @@ public interface MMGame {
 
 	void addListener(MMListener listener);
 
-	void removeListener(MMListener listener);
-
-	void emit(EventObject e);
+//	void emit(EventObject e);
 
 
 	/**
@@ -58,5 +57,7 @@ public interface MMGame {
 	 * @return The state of the specified field.
 	 */
 	MMFieldState getFieldState(int row, int col);
+
+	void select(int row, int col) throws MMException;
 
 }
