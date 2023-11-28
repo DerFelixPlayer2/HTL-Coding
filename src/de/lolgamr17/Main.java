@@ -2,15 +2,29 @@ package de.lolgamr17;
 
 import de.lolgamr17.FSST.threading.Doc;
 import de.lolgamr17.FSST.threading.WaitingRoom;
+import de.lolgamr17.SEN.BinaryTrees.Tree;
 
 public class Main {
     public static void main(String[] args) {
 
-        WaitingRoom w = new WaitingRoom();
+
+        Tree<Integer> tree = new Tree<>();
+        tree.insert(5);
+        tree.insert(4);
+        tree.insert(3);
+        tree.insert(2);
+        tree.insert(1);
+
+        for (Integer i : tree) {
+            System.out.println(i);
+        }
+
+
+        /*WaitingRoom w = new WaitingRoom();
         new Doc(w, 1000).start();
         new Doc(w, 900).start();
 
-        w.start();
+        w.start();/**/
 
     /*Stack stack = new Stack(3);
     try {

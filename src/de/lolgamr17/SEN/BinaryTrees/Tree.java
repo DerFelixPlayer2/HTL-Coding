@@ -1,68 +1,62 @@
-package de.lolgamr17.BinaryTrees;
+package de.lolgamr17.SEN.BinaryTrees;
 
 import org.jetbrains.annotations.NotNull;
 
-class Tree {
-    private static class Node {
-        int value;
-        Node left;
-        Node right;
+import java.util.Iterator;
+import java.util.Stack;
 
-        public Node(int value) {
-            this.value = value;
-        }
-    }
+public class Tree<T extends Comparable<T>> implements Iterable<T> {
 
-    Node root;
+    private Node<T> root;
 
-    Node search(int value) {
-        Node p = root;
+    public Node<T> search(T value) {
+        Node<T> p = root;
         while (p != null) {
             if (p.value == value) return p;
-            if (p.value < value) p = p.left;
+            if (p.value.compareTo(value) < 0) p = p.left;
             else p = p.right;
         }
         return null;
     }
 
-    Node search_recursive(int value) {
+    public Node<T> search_recursive(T value) {
         return search_recursive(root, value);
     }
 
-    static Node search_recursive(Node p, int value) {
+    public Node<T> search_recursive(Node<T> p, T value) {
         if (p == null || p.value == value) return p;
-        else if (value < p.value) return search_recursive(p.left, value);
+        else if (value.compareTo(p.value) < 0) return search_recursive(p.left, value);
         return search_recursive(p.right, value);
     }
 
-    void insert(int value) {
-        Node p = root;
-        Node father = null;
+    public void insert(T value) {
+        Node<T> p = root;
+        Node<T> father = null;
         while (p != null) {
             father = p;
-            if (value < p.value) p = p.left;
+            if (value.compareTo(p.value) < 0) p = p.left;
             else p = p.right;
         }
-        Node n = new Node(value);
+        Node<T> n = new Node<T>(value);
         if (father == null) root = n;
-        else if (value < father.value) father.left = n;
+        else if (value.compareTo(father.value) < 0) father.left = n;
         else father.right = n;
     }
 
-    void insert_recursive(int value) {
+    public void insert_recursive(T value) {
         root = insert_recursive(root, value);
     }
 
-    static @NotNull Node insert_recursive(Node p, int value) {
-        if (p == null) p = new Node(value);
-        else if (value < p.value) p.left = insert_recursive(p.left, value);
+    public @NotNull Node<T> insert_recursive(Node<T> p, T value) {
+        if (p == null) p = new Node<T>(value);
+        else if (value.compareTo(p.value) < 0) p.left = insert_recursive(p.left, value);
         else p.right = insert_recursive(p.right, value);
         return p;
     }
 
-    int treeToVine(Node root) {
-        Node tail = root;
-        Node rest = tail.right;
+    public int treeToVine(Node<T> root) {
+        Node<T> tail = root;
+        Node<T> rest = tail.right;
         int n = 0;
 
         while (rest != null) {
@@ -71,7 +65,7 @@ class Tree {
                 rest = rest.right;
                 n++;
             } else {
-                Node p = rest.left;
+                Node<T> p = rest.left;
                 rest.left = p.right;
                 p.right = rest;
                 rest = p;
@@ -80,5 +74,27 @@ class Tree {
         }
 
         return n;
+    }
+
+    @NotNull
+    @Override
+    public Iterator<T> iterator() {
+        final Stack<Node<T>> traversal = new Stack<>();
+        traversal.push(root);
+
+        return new Iterator<T>() {
+            @Override
+            public boolean hasNext() {
+                return !traversal.isEmpty();
+            }
+
+            @Override
+            public T next() {
+                Node<T> n = traversal.pop();
+                if (n.right != null) traversal.push(n.right);
+                if (n.left != null) traversal.push(n.left);
+                return n.value;
+            }
+        };
     }
 }
