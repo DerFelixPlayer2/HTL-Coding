@@ -1,5 +1,6 @@
 package de.lolgamr17.SEN.BinaryTrees;
 
+import de.lolgamr17.FSST.design_patterns.visitor.tree.TreeVisitor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -9,7 +10,7 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
 
     private Node<T> root;
 
-    public Node<T> search(T value) {
+    public Node<T> search(@NotNull T value) {
         Node<T> p = root;
         while (p != null) {
             if (p.value == value) return p;
@@ -19,17 +20,17 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
         return null;
     }
 
-    public Node<T> search_recursive(T value) {
+    public Node<T> search_recursive(@NotNull T value) {
         return search_recursive(root, value);
     }
 
-    public Node<T> search_recursive(Node<T> p, T value) {
+    public Node<T> search_recursive(Node<T> p, @NotNull T value) {
         if (p == null || p.value == value) return p;
         else if (value.compareTo(p.value) < 0) return search_recursive(p.left, value);
         return search_recursive(p.right, value);
     }
 
-    public void insert(T value) {
+    public void insert(@NotNull T value) {
         Node<T> p = root;
         Node<T> father = null;
         while (p != null) {
@@ -43,18 +44,18 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
         else father.right = n;
     }
 
-    public void insert_recursive(T value) {
+    public void insert_recursive(@NotNull T value) {
         root = insert_recursive(root, value);
     }
 
-    public @NotNull Node<T> insert_recursive(Node<T> p, T value) {
+    public @NotNull Node<T> insert_recursive(Node<T> p, @NotNull T value) {
         if (p == null) p = new Node<T>(value);
         else if (value.compareTo(p.value) < 0) p.left = insert_recursive(p.left, value);
         else p.right = insert_recursive(p.right, value);
         return p;
     }
 
-    public int treeToVine(Node<T> root) {
+    public int treeToVine(@NotNull Node<T> root) {
         Node<T> tail = root;
         Node<T> rest = tail.right;
         int n = 0;
@@ -96,5 +97,9 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
                 return n.value;
             }
         };
+    }
+
+    public void accept(@NotNull TreeVisitor<T> visitor) {
+        visitor.visit(root);
     }
 }
