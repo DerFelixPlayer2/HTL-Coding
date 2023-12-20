@@ -5,11 +5,19 @@
 // the link to your model provided by Teachable Machine export panel
 const URL = "./model/";
 let model, webcam, ctx, labelContainer, maxPredictions, audio;
+let startTime, times, letterIndex = 0, pauseUntil = "";
 
 document.getElementById("start").addEventListener("click", async () => {
+	if (audio) {
+		audio.pause();
+	}
+
 	const modelURL = URL + "model.json";
 	const metadataURL = URL + "metadata.json";
 
+	times = await (await fetch('./timestamps.json')).json()
+
+	startTime = Date.now();
 	audio = new Audio('./YMCA.mp3');
 	audio.loop = true;
 	audio.play();
@@ -33,8 +41,8 @@ document.getElementById("start").addEventListener("click", async () => {
 	canvas.width = size; canvas.height = size;
 	ctx = canvas.getContext("2d");
 	labelContainer = document.getElementById("label-container");
-	for (let i = 0; i < maxPredictions; i++) { // and class labels
-			labelContainer.appendChild(document.createElement("div"));
+	for (let i = 0; i < maxPredictions+1; i++) { // and class labels
+		labelContainer.appendChild(document.createElement("div"));
 	}
 });
 
@@ -43,8 +51,26 @@ document.getElementById("stop").addEventListener("click", async () => {
 });
 
 async function loop(timestamp) {
+	if (audio.currentTime * 1000 > times[letterIndex].time) {
+		audio.pause();
+		pauseUntil = times[letterIndex].letter
+		labelContainer.childNodes[4].innerHTML = `Waiting for ${pauseUntil.toLocaleUpperCase()}`;
+	}
+
 	webcam.update(); // update the webcam frame
-	await predict();
+	const pred = await predict();
+
+	if (pauseUntil.length > 0) {
+		for (const p of pred) {
+			if (p.className === pauseUntil && p.probability > 0.9) {
+				audio.play();
+				pauseUntil = '';
+				letterIndex++;
+				labelContainer.childNodes[4].innerHTML = "";
+			}
+		}
+	}
+
 	window.requestAnimationFrame(loop);
 }
 
@@ -56,23 +82,25 @@ async function predict() {
 	const prediction = await model.predict(posenetOutput);
 
 	for (let i = 0; i < maxPredictions; i++) {
-			const classPrediction =
-					prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-			labelContainer.childNodes[i].innerHTML = classPrediction;
+		const classPrediction =
+			prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+		labelContainer.childNodes[i].innerHTML = classPrediction;
 	}
 
 	// finally draw the poses
 	drawPose(pose);
+
+	return prediction;
 }
 
 function drawPose(pose) {
 	if (webcam.canvas) {
-			ctx.drawImage(webcam.canvas, 0, 0);
-			// draw the keypoints and skeleton
-			if (pose) {
-					const minPartConfidence = 0.5;
-					tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
-					tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
-			}
+		ctx.drawImage(webcam.canvas, 0, 0);
+		// draw the keypoints and skeleton
+		if (pose) {
+			const minPartConfidence = 0.5;
+			tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+			tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+		}
 	}
 }
