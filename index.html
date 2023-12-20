@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+		<script defer src="./code.js"></script>
+
+		<title>YMCA</title>
+	</head>
+	<body>
+		<h1>Teachable Machine Pose Model</h1>
+		<div class="container">
+			<div class="video">
+				<div><canvas id="canvas"></canvas></div>
+				<div class="inner-container">
+					<button type="button" id="start">Start</button>
+					<button type="button" id="stop">Stop</button>
+				</div>
+			</div>
+			<div id="label-container"></div>
+		</div>
+	</body>
+
+	<style>
+		button {
+			width: 5em;
+			height: 2em;
+			margin: 1em;
+		}
+
+		canvas {
+			width: 250px;
+			height: 250px;
+
+			border: 1px solid black;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.inner-container {
+			display: flex;
+			justify-content: space-around;
+		}
+
+		#label-container {
+			margin: 1em;
+
+			font-size: xx-large;
+		}
+	</style>
+</html>
