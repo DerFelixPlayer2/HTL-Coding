@@ -1,0 +1,63 @@
+services:
+  sinus:
+    build: sinus
+    restart: unless-stopped
+    networks:
+      - mqtt
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0.18
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    networks:
+      - mqtt
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  influxdb:
+    image: influxdb:2.7.1
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8086:8086"
+    networks:
+      - frontend
+      - influx
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+      - influxdb-config:/etc/influxdb2
+
+  grafana:  
+    image: grafana/grafana:10.1.5
+    restart: unless-stopped
+    networks:
+      - frontend
+    env_file: .env
+    ports:
+      - "80:3000"
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - grafana-storage:/var/lib/grafana
+
+  telegraf:
+    image: telegraf:1.28.5
+    restart: unless-stopped
+    networks:
+      - mqtt
+      - influx
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+
+networks:
+  frontend: {}
+  mqtt:
+    internal: true
+  influx:
+    internal: true
+
+volumes:
+  influxdb-data:  
+  influxdb-config:
+  grafana-storage:
