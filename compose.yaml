@@ -5,6 +5,12 @@ services:
     networks:
       - mqtt
 
+  pv:
+    build: pv
+    restart: unless-stopped
+    networks:
+      - mqtt
+
   mosquitto:
     image: eclipse-mosquitto:2.0.18
     restart: unless-stopped
