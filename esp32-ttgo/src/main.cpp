@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#include "fir.hpp"
+#include "pid.hpp"
 
-void setup() { fir_setup(); }
+void setup() { pid_setup(); }
 
-void loop() { fir_loop(); }
+void loop() { pid_loop(); }
