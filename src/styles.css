@@ -5,8 +5,8 @@ button {
 }
 
 canvas {
-  width: 250px;
-  height: 250px;
+  width: 500px;
+  height: 500px;
 
   border: 1px solid black;
 }
@@ -22,7 +22,11 @@ canvas {
 }
 
 #label-container {
-  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  margin-left: 1em;
 
   font-size: xx-large;
 }

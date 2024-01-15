@@ -1,0 +1,106 @@
+const URL = "./model/";
+const modelURL = URL + "model.json";
+const metadataURL = URL + "metadata.json";
+
+
+let model, webcam, ctx, maxPredictions, audio, labelContainer;
+let startTime, letterIndex = 0, pauseUntil = "";
+
+let running = false;
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+	webcam = new tmPose.Webcam(500, 500, true); // width, height, flip
+	await webcam.setup(); // request access to the webcam
+	await webcam.play();
+
+	const canvas = document.getElementById("canvas")
+	canvas.width = canvas.clientWidth;
+	canvas.height = canvas.clientHeight;
+	ctx = canvas.getContext("2d");
+	labelContainer = document.getElementById("label-container");
+
+	window.requestAnimationFrame(loop);
+});
+
+document.getElementById("start").addEventListener("click", async () => {
+	if (running) return;
+
+	running = true;
+	startTime = Date.now();
+
+	audio = new Audio('./YMCA.mp3');
+	audio.play();
+
+	timestamps = await (await fetch('./timestamps.json')).json()
+	model = await tmPose.load(modelURL, metadataURL);
+	maxPredictions = model.getTotalClasses();
+});
+
+
+async function predict() {
+	const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+	const prediction = await model.predict(posenetOutput);
+
+	getPredictionLabels().update(prediction);
+	updateVideoKeypoints(pose);
+
+	return prediction;
+}
+
+function getPredictionLabels() {
+	return {
+		update(predictions) {
+			for (let i = 0, j = 0; i < predictions.length; j++) {
+				if (labelContainer.childNodes[j].nodeName === "DIV") {
+					const p = predictions[i++];
+					labelContainer.childNodes[j].innerHTML = `${p.className}: ${p.probability.toFixed(2)}`;
+				}
+			}
+		},
+		set(index, innerHTML) {
+			for (let i = 0, j = 0; i <= index; j++) {
+				if (labelContainer.childNodes[j].nodeName === "DIV" && i++ === index) {
+					labelContainer.childNodes[j].innerHTML = innerHTML;
+				}
+			}
+		}
+	}
+}
+
+function updateVideoKeypoints(pose) {
+	if (pose) {
+		const minPartConfidence = 0.5;
+		tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+		tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+	}
+}
+
+let timestamps;
+async function loop() {
+	webcam.update();
+	if (webcam.canvas) ctx.drawImage(webcam.canvas, 0, 0);
+
+	if (running && !!timestamps && !!model && !!audio) {
+		if (audio.currentTime * 1000 > timestamps[letterIndex].time) {
+			audio.pause();
+			pauseUntil = timestamps[letterIndex].letter
+			getPredictionLabels().set(4, `Waiting for ${pauseUntil.toLocaleUpperCase()}`);
+		}
+
+		const pred = await predict();
+
+		if (pauseUntil.length > 0) {
+			for (const p of pred) {
+				if (p.className === pauseUntil && p.probability > 0.9) {
+					audio.play();
+					pauseUntil = '';
+					letterIndex++;
+					getPredictionLabels().set(4, "");
+				}
+			}
+		}
+	}
+
+	window.requestAnimationFrame(loop);
+}
