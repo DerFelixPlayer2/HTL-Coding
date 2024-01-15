@@ -3,7 +3,7 @@ const modelURL = URL + "model.json";
 const metadataURL = URL + "metadata.json";
 
 
-let model, webcam, ctx, maxPredictions, audio, labelContainer;
+let model, webcam, ctx, maxPredictions, audio, labelContainer, next_action, lds_ring;
 let startTime, letterIndex = 0, pauseUntil = "";
 
 let running = false;
@@ -19,12 +19,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 	canvas.height = canvas.clientHeight;
 	ctx = canvas.getContext("2d");
 	labelContainer = document.getElementById("label-container");
+	lds_ring = document.getElementById("lds-ring");
+	next_action = document.getElementsByClassName("next-action")[0];
 
 	window.requestAnimationFrame(loop);
 });
 
 document.getElementById("start").addEventListener("click", async () => {
 	if (running) return;
+	lds_ring.classList.remove("hidden");
 
 	running = true;
 	startTime = Date.now();
@@ -35,6 +38,9 @@ document.getElementById("start").addEventListener("click", async () => {
 	timestamps = await (await fetch('./timestamps.json')).json()
 	model = await tmPose.load(modelURL, metadataURL);
 	maxPredictions = model.getTotalClasses();
+
+	lds_ring.classList.add("hidden");
+	next_action.innerHTML = 'Playing';
 });
 
 
@@ -52,15 +58,15 @@ function getPredictionLabels() {
 	return {
 		update(predictions) {
 			for (let i = 0, j = 0; i < predictions.length; j++) {
-				if (labelContainer.childNodes[j].nodeName === "DIV") {
+				if (labelContainer.childNodes[j].classList?.contains("perc")) {
 					const p = predictions[i++];
-					labelContainer.childNodes[j].innerHTML = `${p.className}: ${p.probability.toFixed(2)}`;
+					labelContainer.childNodes[j].innerHTML = p.probability.toFixed(2);
 				}
 			}
 		},
 		set(index, innerHTML) {
 			for (let i = 0, j = 0; i <= index; j++) {
-				if (labelContainer.childNodes[j].nodeName === "DIV" && i++ === index) {
+				if (labelContainer.childNodes[j].classList?.contains("perc") && i++ === index) {
 					labelContainer.childNodes[j].innerHTML = innerHTML;
 				}
 			}
@@ -85,7 +91,7 @@ async function loop() {
 		if (audio.currentTime * 1000 > timestamps[letterIndex].time) {
 			audio.pause();
 			pauseUntil = timestamps[letterIndex].letter
-			getPredictionLabels().set(4, `Waiting for ${pauseUntil.toLocaleUpperCase()}`);
+			next_action.innerHTML = `Waiting for ${pauseUntil.toLocaleUpperCase()}`;
 		}
 
 		const pred = await predict();
@@ -96,7 +102,7 @@ async function loop() {
 					audio.play();
 					pauseUntil = '';
 					letterIndex++;
-					getPredictionLabels().set(4, "");
+					next_action.innerHTML = `Playing`;
 				}
 			}
 		}

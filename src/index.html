@@ -14,20 +14,37 @@
 	</head>
 	<body>
 		<h1>Teachable Machine Pose Model</h1>
+
 		<div class="container">
 			<div class="video">
-				<div><canvas id="canvas"></canvas></div>
-				<div class="inner-container">
-					<button type="button" id="start">Start</button>
-					<button type="button" id="stop">Stop</button>
+				<div class="canvas-container">
+					<canvas id="canvas"></canvas>
+					<div class="lds-ring hidden" id="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+					<p class="next-action"></p>
+					<div class="inner-container">
+						<div class="button" id="start">Play</div>
+						<div class="button" id="stop">Pause</div>
+					</div>
 				</div>
 			</div>
-			<div id="label-container">
-				<div>Y: 0.00</div>
-				<div>M: 0.00</div>
-				<div>C: 0.00</div>
-				<div>A: 0.00</div>
-				<div>None: 0.00</div>
+			<div class="grid-container">
+				<div id="label-container">
+					<div class="grid-item">Y:</div>
+					<div class="grid-item perc">0.00</div>
+					<div class="grid-item">M:</div>
+					<div class="grid-item perc">0.00</div>
+					<div class="grid-item">C:</div>
+					<div class="grid-item perc">0.00</div>
+					<div class="grid-item">A:</div>
+					<div class="grid-item perc">0.00</div>
+					<div class="grid-item">None:</div>
+					<div class="grid-item perc">0.00</div>
+				</div>
 			</div>
 		</div>
 	</body>
