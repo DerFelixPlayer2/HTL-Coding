@@ -30,17 +30,24 @@ document.getElementById("start").addEventListener("click", async () => {
 	lds_ring.classList.remove("hidden");
 
 	running = true;
-	startTime = Date.now();
+	if (!startTime) startTime = Date.now();
 
-	audio = new Audio('./YMCA.mp3');
+	if (!audio) audio = new Audio('./YMCA.mp3');
 	audio.play();
 
-	timestamps = await (await fetch('./timestamps.json')).json()
-	model = await tmPose.load(modelURL, metadataURL);
-	maxPredictions = model.getTotalClasses();
+	if (!timestamps) timestamps = await (await fetch('./timestamps.json')).json()
+	if (!model) model = await tmPose.load(modelURL, metadataURL);
+	if (!maxPredictions) maxPredictions = model.getTotalClasses();
 
 	lds_ring.classList.add("hidden");
 	next_action.innerHTML = 'Playing';
+});
+
+document.getElementById("stop").addEventListener("click", () => {
+	if (!running) return;
+	running = false;
+	audio.pause();
+	next_action.innerHTML = 'Paused';
 });
 
 
