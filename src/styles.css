@@ -1,0 +1,28 @@
+button {
+  width: 5em;
+  height: 2em;
+  margin: 1em;
+}
+
+canvas {
+  width: 250px;
+  height: 250px;
+
+  border: 1px solid black;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.inner-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+#label-container {
+  margin: 1em;
+
+  font-size: xx-large;
+}
