@@ -1,6 +1,8 @@
 const URL = "./model/";
 const modelURL = URL + "model.json";
 const metadataURL = URL + "metadata.json";
+window.modelURL = modelURL;
+window.metadataURL = metadataURL;
 
 
 let model, webcam, ctx, maxPredictions, audio, labelContainer, next_action, lds_ring;
@@ -11,6 +13,7 @@ let running = false;
 
 document.addEventListener("DOMContentLoaded", async () => {
 	webcam = new tmPose.Webcam(500, 500, true); // width, height, flip
+	window.webcam = webcam;
 	await webcam.setup(); // request access to the webcam
 	await webcam.play();
 
@@ -36,7 +39,7 @@ document.getElementById("start").addEventListener("click", async () => {
 	audio.play();
 
 	if (!timestamps) timestamps = await (await fetch('./timestamps.json')).json()
-	if (!model) model = await tmPose.load(modelURL, metadataURL);
+	if (!model) { model = await tmPose.load(modelURL, metadataURL); window.model = model; }
 	if (!maxPredictions) maxPredictions = model.getTotalClasses();
 
 	lds_ring.classList.add("hidden");
@@ -48,6 +51,19 @@ document.getElementById("stop").addEventListener("click", () => {
 	running = false;
 	audio.pause();
 	next_action.innerHTML = 'Paused';
+});
+
+document.getElementById("start-test").addEventListener("click", () => {
+	running = false;
+	audio?.pause();
+
+	setTimeout(() => {
+		audio = null;
+		startTime = null;
+		pauseUntil = "";
+		letterIndex = 0;
+		next_action.innerHTML = '';
+	}, 20);
 });
 
 

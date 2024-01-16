@@ -21,7 +21,7 @@ h1 {
 
   width: 3.5em;
   margin: 1em;
-  padding: .2em .8em;
+  padding: .3em .8em;
 
   border-radius: 5px;
   border: 1px solid black;
@@ -30,6 +30,7 @@ h1 {
   align-items: center;
   
   cursor: pointer;
+  user-select: none;
 }
 
 .button:hover {
@@ -43,6 +44,8 @@ h1 {
 canvas {
   width: 500px;
   height: 500px;
+
+  margin: 0 2em;
 
   border: 1px solid black;
 }
@@ -61,6 +64,8 @@ canvas {
   top: -5em;
 
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -71,9 +76,19 @@ canvas {
 }
 
 .grid-container {
+  width: min-content;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-side {
+  flex-direction: column;
   flex-grow: 1;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+
+  margin-right: 3em;
 }
 
 #label-container {
@@ -92,6 +107,65 @@ canvas {
   margin-bottom: .25em;
 }
 
+.confusion-matrix .grid-item {
+  text-align: center;
+
+  margin: 0px;
+
+  border: 1px solid lightgray;
+}
+
+.confusion-matrix {
+  display: grid;
+
+  gap: 0;
+  grid-template-areas: 
+    "info info actual actual"
+    ". . a-t a-f"
+    "predicted p-t tp fp"
+    "predicted p-f fn tn";
+
+  margin: 2em 0px;
+}
+
+.confusion-matrix .grid-item:nth-child(1) {
+  grid-area: actual;
+}
+.confusion-matrix .grid-item:nth-child(2) {
+  grid-area: predicted;
+}
+.confusion-matrix .grid-item:nth-child(3) {
+  grid-area: a-t;
+}
+.confusion-matrix .grid-item:nth-child(4) {
+  grid-area: a-f;
+}
+.confusion-matrix .grid-item:nth-child(5) {
+  grid-area: p-t;
+}
+.confusion-matrix .grid-item:nth-child(6) {
+  grid-area: p-f;
+}
+.confusion-matrix .grid-item:nth-child(7) {
+  grid-area: tp;
+}
+.confusion-matrix .grid-item:nth-child(8) {
+  grid-area: fp;
+}
+.confusion-matrix .grid-item:nth-child(9) {
+  grid-area: fn;
+}
+.confusion-matrix .grid-item:nth-child(10) {
+  grid-area: tn;
+}
+.confusion-matrix .grid-item:nth-child(11) {
+  grid-area: info;
+  border: none;
+  text-align: left;
+}
+
+/* #confusion-matrix .grid-item::after */
+
 .hidden {
   display: none !important;
 }
@@ -105,6 +179,31 @@ canvas {
   text-align: center;
   font-size: x-large;
 }
+
+#count-down {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+
+  font-size: xx-large;
+}
+
+.test {
+  width: min-content;
+  /* background-color: blue; */
+
+  position: relative;
+  top: -15em;
+}
+
+#test-y,
+#test-m,
+#test-c,
+#test-a,
+.test .button {
+  width: 7em;
+}
+
 
 
 
