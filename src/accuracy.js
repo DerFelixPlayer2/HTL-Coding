@@ -46,7 +46,19 @@ async function runTest() {
     updateAccuracy(prediction);
   }, 1000 / 30);
 
-  setTimeout(() => clearInterval(i), 10000);
+  let n = 10;
+  window.next_action.innerHTML = 'Testing ' + currentTest.toUpperCase() + '. ' +n+' more seconds.';
+  const i2 = setInterval(() => {
+    n--;
+    window.next_action.innerHTML = 'Testing ' + currentTest.toUpperCase() + '. ' + n + ' more seconds.';
+  }, 1000);
+
+  setTimeout(() => {
+    clearInterval(i);
+    clearInterval(i2);
+
+    window.next_action.innerHTML = '';
+  }, 10000);
 }
 
 function updateAccuracy(prediction) {
@@ -163,11 +175,26 @@ function updateAccuracy(prediction) {
 
 }
 
-function updateMatrix(matrix, tp, fp, fn, tn) {
-  matrix.getElementsByClassName("tp")[0].innerHTML = parseInt(matrix.getElementsByClassName("tp")[0].innerHTML) + tp;
-  matrix.getElementsByClassName("fp")[0].innerHTML = parseInt(matrix.getElementsByClassName("fp")[0].innerHTML) + fp;
-  matrix.getElementsByClassName("fn")[0].innerHTML = parseInt(matrix.getElementsByClassName("fn")[0].innerHTML) + fn;
-  matrix.getElementsByClassName("tn")[0].innerHTML = parseInt(matrix.getElementsByClassName("tn")[0].innerHTML) + tn;
+function updateMatrix(matrix, dtp, dfp, dfn, dtn) {
+  const tp = parseInt(matrix.getElementsByClassName("tp")[0].innerHTML);
+  const fp = parseInt(matrix.getElementsByClassName("fp")[0].innerHTML);
+  const fn = parseInt(matrix.getElementsByClassName("fn")[0].innerHTML);
+  const tn = parseInt(matrix.getElementsByClassName("tn")[0].innerHTML);
+
+  matrix.getElementsByClassName("tp")[0].innerHTML = tp + dtp;
+  matrix.getElementsByClassName("fp")[0].innerHTML = fp + dfp;
+  matrix.getElementsByClassName("fn")[0].innerHTML = fn + dfn;
+  matrix.getElementsByClassName("tn")[0].innerHTML = tn + dtn;
+
+  const accuracy = (tp + tn) / (tp + tn + fp + fn);
+  const precision = tp / (tp + fp);
+  const recall = tp / (tp + fn);
+  const f1 = 2 * precision * recall / (precision + recall);
+
+  matrix.getElementsByClassName("a")[0].innerHTML = accuracy.toFixed(2);
+  matrix.getElementsByClassName("p")[0].innerHTML = precision.toFixed(2);
+  matrix.getElementsByClassName("r")[0].innerHTML = recall.toFixed(2);
+  matrix.getElementsByClassName("f")[0].innerHTML = f1.toFixed(2);
 }
 
 function updateVideoKeypoints(pose) {

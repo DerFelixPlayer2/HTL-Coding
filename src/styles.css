@@ -123,7 +123,9 @@ canvas {
     "info info actual actual"
     ". . a-t a-f"
     "predicted p-t tp fp"
-    "predicted p-f fn tn";
+    "predicted p-f fn tn"
+    "acc pres rec f1"
+    "acc-v pres-v rec-v f1-v";
 
   margin: 2em 0px;
 }
@@ -162,6 +164,38 @@ canvas {
   grid-area: info;
   border: none;
   text-align: left;
+}
+.confusion-matrix .grid-item:nth-child(12) {
+  grid-area: acc;
+  border: none;
+}
+.confusion-matrix .grid-item:nth-child(13) {
+  grid-area: pres;
+  border: none;
+}
+.confusion-matrix .grid-item:nth-child(14) {
+  grid-area: rec;
+  border: none;
+}
+.confusion-matrix .grid-item:nth-child(15) {
+  grid-area: f1;
+  border: none;
+}
+.confusion-matrix .grid-item:nth-child(16) {
+  grid-area: acc-v;
+  border: none;
+}
+.confusion-matrix .grid-item:nth-child(17) {
+  grid-area: pres-v;
+  border: none;
+}
+.confusion-matrix .grid-item:nth-child(18) {
+  grid-area: rec-v;
+  border: none;
+}
+.confusion-matrix .grid-item:nth-child(19) {
+  grid-area: f1-v;
+  border: none;
 }
 
 /* #confusion-matrix .grid-item::after */
