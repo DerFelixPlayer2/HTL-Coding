@@ -7,31 +7,28 @@
 #define LB 3
 #define W 4
 
-int min_delay = 8;
-int delay_multiplier = 8;
-int freq = 5000;
-int res = 8;
+uint32_t __delay = 500;
+uint8_t res = 8;
 
 namespace Motor {
 
-bool forward = false;
+bool forwardR = false;
+bool forwardL = false;
+unsigned long __timer_R = 0;
+unsigned long __timer_L = 0;
 
-void Init() {
+void Init(int freq) {
 	ledcSetup(RF, freq, res);
 	ledcSetup(RB, freq, res);
 	ledcSetup(LF, freq, res);
 	ledcSetup(LB, freq, res);
 	ledcSetup(W, freq, res);
 
-	ledcAttachPin(23, RF);
-	ledcAttachPin(22, RF);
-	ledcAttachPin(21, RB);
+	ledcAttachPin(21, RF);
 	ledcAttachPin(19, RB);
 	ledcAttachPin(18, LF);
-	ledcAttachPin(5, LF);
-	ledcAttachPin(17, LB);
-	ledcAttachPin(16, LB);
-	ledcAttachPin(4, W);
+	ledcAttachPin(5, LB);
+	ledcAttachPin(17, W);
 }
 
 void force_all_off() {
@@ -43,25 +40,38 @@ void force_all_off() {
 }
 
 void SetSpeedR(int8_t dc) {	 // -128 - 127
-	if (dc < -5) {
+	// Serial.printf("R: %d\n", dc);
+	if (dc < -STICK_SPAZE) {
 		ledcWrite(RF, 0);
 
-		if (forward) {
-			delay(min_delay + (delay_multiplier / freq));
-			forward = false;
+		if (forwardR) {
+			Serial.println("delaying R");
+			__timer_R = millis();
+			forwardR = false;
+		} else if (__timer_R > 0) {
+			if (millis() > __timer_R + __delay) {
+				__timer_R = 0;
+				Serial.println("delay R complete");
+			}
+		} else {
+			ledcWrite(RB, dc * -2);
 		}
 
-		ledcWrite(RB, dc * -2);
-
-	} else if (dc > 5) {
+	} else if (dc > STICK_SPAZE) {
 		ledcWrite(RB, 0);
 
-		if (!forward) {
-			delay(min_delay + (delay_multiplier / freq));
-			forward = true;
+		if (!forwardR) {
+			Serial.println("delaying R");
+			__timer_R = millis();
+			forwardR = true;
+		} else if (__timer_R > 0) {
+			if (millis() > __timer_R + __delay) {
+				__timer_R = 0;
+				Serial.println("delay R complete");
+			}
+		} else {
+			ledcWrite(RF, dc * 2);
 		}
-
-		ledcWrite(RF, dc * 2);
 
 	} else {
 		ledcWrite(RF, 0);
@@ -70,25 +80,38 @@ void SetSpeedR(int8_t dc) {	 // -128 - 127
 }
 
 void SetSpeedL(int8_t dc) {	 // -128 - 127
-	if (dc < -5) {
+	// Serial.printf("R: %d\n", dc);
+	if (dc < -STICK_SPAZE) {
 		ledcWrite(LF, 0);
 
-		if (forward) {
-			delay(min_delay + (delay_multiplier / freq));
-			forward = false;
+		if (forwardL) {
+			Serial.println("delaying L");
+			__timer_L = millis();
+			forwardL = false;
+		} else if (__timer_L > 0) {
+			if (millis() > __timer_L + __delay) {
+				__timer_L = 0;
+				Serial.println("delay L complete");
+			}
+		} else {
+			ledcWrite(LB, dc * -2);
 		}
 
-		ledcWrite(LB, dc * -2);
-
-	} else if (dc > 5) {
+	} else if (dc > STICK_SPAZE) {
 		ledcWrite(LB, 0);
 
-		if (!forward) {
-			delay(min_delay + (delay_multiplier / freq));
-			forward = true;
+		if (!forwardL) {
+			Serial.println("delaying L");
+			__timer_L = millis();
+			forwardL = true;
+		} else if (__timer_L > 0) {
+			if (millis() > __timer_L + __delay) {
+				__timer_L = 0;
+				Serial.println("delay L complete");
+			}
+		} else {
+			ledcWrite(LF, dc * 2);
 		}
-
-		ledcWrite(LF, dc * 2);
 
 	} else {
 		ledcWrite(LF, 0);
@@ -96,8 +119,26 @@ void SetSpeedL(int8_t dc) {	 // -128 - 127
 	}
 }
 
-void enableWeapon() { ledcWrite(W, 255); }
+void SetSpeedW(uint8_t dc) { ledcWrite(W, dc); }
 
-void disableWeapon() { ledcWrite(W, 0); }
+uint8_t speedLevel = 0;	 // 0 to 9
+void increaseWeaponSpeedLevel() {
+	if (speedLevel < 9) {
+		speedLevel++;
+	}
+
+	SetSpeedW(255 / (11 - speedLevel));
+}
+
+void decreaseWeaponSpeedLevel() {
+	if (speedLevel > 0) {
+		speedLevel--;
+	}
+
+	if (speedLevel == 0)
+		SetSpeedW(0);
+	else
+		SetSpeedW(255 / (11 - speedLevel));
+}
 
 }  // namespace Motor
