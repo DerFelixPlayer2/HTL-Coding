@@ -1,0 +1,16 @@
+{
+  "name": "visualization",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sinus.js",
+  "type": "module",
+  "scripts": {
+    "sinus": "node sinus.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^5.3.1"
+  }
+}

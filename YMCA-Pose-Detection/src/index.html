@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+
+		<script defer src="./ymca.js"></script>
+		<script defer src="./accuracy.js"></script>
+
+		<link rel="stylesheet" href="./styles.css" />
+
+		<title>YMCA</title>
+	</head>
+	<body>
+		<h1>Teachable Machine Pose Model</h1>
+
+		<div class="container">
+			<div class="video">
+				<div class="canvas-container">
+					<canvas id="canvas"></canvas>
+
+					<p id="count-down"></p>
+					<p class="next-action"></p>
+					<div class="inner-container">
+						<div class="button" id="start">Play</div>
+						<div class="button" id="stop">Pause</div>
+					</div>
+					<div class="inner-container hidden">
+						<div class="button" id="test-y">Test Y Accuracy</div>
+						<div class="button" id="test-m">Test M Accuracy</div>
+						<div class="button" id="test-c">Test C Accuracy</div>
+						<div class="button" id="test-a">Test A Accuracy</div>
+					</div>
+				</div>
+			</div>
+			<div class="right-side">
+				<div class="grid-container">
+					<div id="label-container">
+						<div class="grid-item">Y:</div>
+						<div class="grid-item perc">0.00</div>
+						<div class="grid-item">M:</div>
+						<div class="grid-item perc">0.00</div>
+						<div class="grid-item">C:</div>
+						<div class="grid-item perc">0.00</div>
+						<div class="grid-item">A:</div>
+						<div class="grid-item perc">0.00</div>
+						<div class="grid-item">None:</div>
+						<div class="grid-item perc">0.00</div>
+					</div>
+				</div>
+
+				<div class="accuracy hidden">
+					<div class="confusion-matrix confusion-matrix-y">
+						<p class="grid-item">Actual</p>
+						<p class="grid-item">Prediction</p>
+						<p class="grid-item">Positive</p>
+						<p class="grid-item">Negative</p>
+						<p class="grid-item">Positive</p>
+						<p class="grid-item">Negative</p>
+						<p class="grid-item tp">0</p>
+						<p class="grid-item fp">0</p>
+						<p class="grid-item fn">0</p>
+						<p class="grid-item tn">0</p>
+						<p class="grid-item">Confusion Matrix Y:</p>
+						<p class="grid-item">Accuracy</p>
+						<p class="grid-item">Precision</p>
+						<p class="grid-item">Recall</p>
+						<p class="grid-item">F1-Score</p>
+						<p class="grid-item a">0</p>
+						<p class="grid-item p">0</p>
+						<p class="grid-item r">0</p>
+						<p class="grid-item f">0</p>
+					</div>
+					<div class="confusion-matrix confusion-matrix-m">
+						<p class="grid-item">Actual</p>
+						<p class="grid-item">Prediction</p>
+						<p class="grid-item">Positive</p>
+						<p class="grid-item">Negative</p>
+						<p class="grid-item">Positive</p>
+						<p class="grid-item">Negative</p>
+						<p class="grid-item tp">0</p>
+						<p class="grid-item fp">0</p>
+						<p class="grid-item fn">0</p>
+						<p class="grid-item tn">0</p>
+						<p class="grid-item">Confusion Matrix M:</p>
+						<p class="grid-item">Accuracy</p>
+						<p class="grid-item">Precision</p>
+						<p class="grid-item">Recall</p>
+						<p class="grid-item">F1-Score</p>
+						<p class="grid-item a">0</p>
+						<p class="grid-item p">0</p>
+						<p class="grid-item r">0</p>
+						<p class="grid-item f">0</p>
+					</div>
+					<div class="confusion-matrix confusion-matrix-c">
+						<p class="grid-item">Actual</p>
+						<p class="grid-item">Prediction</p>
+						<p class="grid-item">Positive</p>
+						<p class="grid-item">Negative</p>
+						<p class="grid-item">Positive</p>
+						<p class="grid-item">Negative</p>
+						<p class="grid-item tp">0</p>
+						<p class="grid-item fp">0</p>
+						<p class="grid-item fn">0</p>
+						<p class="grid-item tn">0</p>
+						<p class="grid-item">Confusion Matrix C:</p>
+						<p class="grid-item">Accuracy</p>
+						<p class="grid-item">Precision</p>
+						<p class="grid-item">Recall</p>
+						<p class="grid-item">F1-Score</p>
+						<p class="grid-item a">0</p>
+						<p class="grid-item p">0</p>
+						<p class="grid-item r">0</p>
+						<p class="grid-item f">0</p>
+					</div>
+					<div class="confusion-matrix confusion-matrix-a">
+						<p class="grid-item">Actual</p>
+						<p class="grid-item">Prediction</p>
+						<p class="grid-item">Positive</p>
+						<p class="grid-item">Negative</p>
+						<p class="grid-item">Positive</p>
+						<p class="grid-item">Negative</p>
+						<p class="grid-item tp">0</p>
+						<p class="grid-item fp">0</p>
+						<p class="grid-item fn">0</p>
+						<p class="grid-item tn">0</p>
+						<p class="grid-item">Confusion Matrix A:</p>
+						<p class="grid-item">Accuracy</p>
+						<p class="grid-item">Precision</p>
+						<p class="grid-item">Recall</p>
+						<p class="grid-item">F1-Score</p>
+						<p class="grid-item a">0</p>
+						<p class="grid-item p">0</p>
+						<p class="grid-item r">0</p>
+						<p class="grid-item f">0</p>
+					</div>
+				</div>
+
+				<div class="test">
+					<div class="button" id="start-test">Test Accuracy</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="lds-ring hidden" id="lds-ring">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</body>
+</html>
