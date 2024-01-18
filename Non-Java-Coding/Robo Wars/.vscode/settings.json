@@ -1,0 +1,16 @@
+{
+  "files.associations": {
+    "array": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "vector": "cpp",
+    "string_view": "cpp",
+    "initializer_list": "cpp",
+    "bt_types.h": "c",
+    "bt_target.h": "c",
+    "bt_utils.h": "c",
+    "gap_int.h": "c"
+  }
+}
