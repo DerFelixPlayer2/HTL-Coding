@@ -10,6 +10,6 @@ public class ResistorApp {
             case 'c' -> new Multimeter(controller, Mode.CURRENT);
             default -> throw new IllegalArgumentException("Invalid mode");
         };
-        Modell modell = new Modell(controller);
+//        Modell modell = new Modell(controller);
     }
 }

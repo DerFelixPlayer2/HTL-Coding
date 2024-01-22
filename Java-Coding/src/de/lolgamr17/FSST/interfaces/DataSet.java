@@ -5,23 +5,23 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
-public class DataSet implements Iterable<Object> {
-    private final Object[] data;
+public class DataSet<T> implements Iterable<T> {
+    private final T[] data;
     private int count;
 
     public DataSet(int size) {
-        data = new Object[size];
+        data = (T[]) new Object[size];
         count = 0;
     }
 
-    public void add(Object o) {
+    public void add(T o) {
         if (count < data.length) {
             data[count++] = o;
         }
     }
 
     @Nullable
-    public Object get() {
+    public T get() {
         if (count > 0) {
             return data[--count];
         }
@@ -30,7 +30,7 @@ public class DataSet implements Iterable<Object> {
 
     @NotNull
     @Override
-    public Iterator<Object> iterator() {
+    public Iterator<T> iterator() {
         return new Iterator<>() {
             private int index = 0;
 
@@ -40,13 +40,8 @@ public class DataSet implements Iterable<Object> {
             }
 
             @Override
-            public Object next() {
+            public T next() {
                 return data[index++];
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
             }
         };
     }

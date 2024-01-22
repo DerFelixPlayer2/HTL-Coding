@@ -13,10 +13,6 @@ public class ClientConnectPacket extends Packet {
         super(packet);
     }
 
-    public String getClientName() {
-        return packet.getString("client");
-    }
-
     @Override
     public String toNiceString() {
         return "[" + getTimestamp() + "] " + getClientName() + " has connected.";

@@ -17,16 +17,17 @@ public class ServerMain {
     private final static String name = "SYSTEM";
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(ServerMain.port);
-        System.out.printf("Listening on port %d...\n", ServerMain.port);
+        try (ServerSocket serverSocket = new ServerSocket(ServerMain.port)) {
+            System.out.printf("Listening on port %d...\n", ServerMain.port);
 
-        new OutputThread().start();
+            new OutputThread().start();
 
-        while (true) {
-            final Socket clientSocket = serverSocket.accept();
-            SocketServer client = new SocketServer(clientSocket);
-            clients.add(client);
-            client.start();
+            while (true) {
+                final Socket clientSocket = serverSocket.accept();
+                SocketServer client = new SocketServer(clientSocket);
+                clients.add(client);
+                client.start();
+            }
         }
     }
 

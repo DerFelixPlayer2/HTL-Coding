@@ -1,7 +1,7 @@
 package de.lolgamr17.FSST.exceptions;
 
 public class Stack {
-    private int[] stack;
+    private final int[] stack;
     private int top;
 
     public Stack(int size) {
