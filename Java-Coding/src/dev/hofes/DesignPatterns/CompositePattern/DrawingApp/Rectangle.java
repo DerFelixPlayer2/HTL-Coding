@@ -2,7 +2,7 @@ package dev.hofes.DesignPatterns.CompositePattern.DrawingApp;
 
 import java.awt.*;
 
-class Rectangle extends Shape {
+public class Rectangle extends Shape {
     private final int w, h;
 
     Rectangle(int x, int y, int w, int h) {

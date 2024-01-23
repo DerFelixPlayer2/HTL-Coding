@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RectangleIntersection {
-    private static class Rectangle {
+    public static class Rectangle {
         int x, y;
         int width, height;
 

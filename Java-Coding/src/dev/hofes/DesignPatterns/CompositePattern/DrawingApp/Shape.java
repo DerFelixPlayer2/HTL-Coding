@@ -2,7 +2,7 @@ package dev.hofes.DesignPatterns.CompositePattern.DrawingApp;
 
 import java.awt.*;
 
-abstract class Shape {
+public abstract class Shape {
     public void setX(int x) {
         this.x = x;
     }

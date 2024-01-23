@@ -62,7 +62,7 @@ public class ValueApp {
         historyPanel.setBorder(BorderFactory.createTitledBorder("History"));
         historyPanel.setLayout(new BorderLayout());
         historyListModel = new DefaultListModel<>();
-        historyList = new JList<Integer>(historyListModel);
+        historyList = new JList<>(historyListModel);
         historyList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         historyPanel.add(new JScrollPane(historyList), BorderLayout.NORTH);
 

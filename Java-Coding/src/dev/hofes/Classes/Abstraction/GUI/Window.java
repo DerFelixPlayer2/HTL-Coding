@@ -26,9 +26,7 @@ public class Window {
 
 	/**
 	 * Initialisiert das Ausgabefenster und �ffnet es.
-	 * 
-	 * @param width
-	 *            Die Breite f�r das
+	 *
 	 * @param width
 	 *            Die Hoehe f�r das Fenster
 	 */

@@ -25,7 +25,7 @@ public class mHashMap<S, V> {
             d += 2;
             hash = (hash + Math.abs(d)) % tabSize;
         }
-        tab[hash] = new Entry<S, V>(key, data);
+        tab[hash] = new Entry<>(key, data);
     }
 
     @Nullable

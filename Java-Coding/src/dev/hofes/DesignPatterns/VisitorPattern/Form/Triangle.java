@@ -1,6 +1,6 @@
 package dev.hofes.DesignPatterns.VisitorPattern.Form;
 
-class Triangle implements Form {
+public class Triangle implements Form {
     private final double side1;
     private final double side2;
     private final double side3;

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public abstract class Post {
-    private final ArrayList<String> comments = new ArrayList<String>(1);
+    private final ArrayList<String> comments = new ArrayList<>(1);
     private final String username;
     private int likes = 0;
     private final long timestamp;

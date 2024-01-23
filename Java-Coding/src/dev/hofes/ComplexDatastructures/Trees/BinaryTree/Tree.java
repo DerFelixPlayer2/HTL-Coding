@@ -38,7 +38,7 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
             if (value.compareTo(p.value) < 0) p = p.left;
             else p = p.right;
         }
-        Node<T> n = new Node<T>(value);
+        Node<T> n = new Node<>(value);
         if (father == null) root = n;
         else if (value.compareTo(father.value) < 0) father.left = n;
         else father.right = n;
@@ -49,7 +49,7 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
     }
 
     public @NotNull Node<T> insert_recursive(Node<T> p, @NotNull T value) {
-        if (p == null) p = new Node<T>(value);
+        if (p == null) p = new Node<>(value);
         else if (value.compareTo(p.value) < 0) p.left = insert_recursive(p.left, value);
         else p.right = insert_recursive(p.right, value);
         return p;
@@ -83,7 +83,7 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
         final Stack<Node<T>> traversal = new Stack<>();
         traversal.push(root);
 
-        return new Iterator<T>() {
+        return new Iterator<>() {
             @Override
             public boolean hasNext() {
                 return !traversal.isEmpty();

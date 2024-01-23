@@ -1,5 +1,5 @@
 package dev.hofes.DesignPatterns.VisitorPattern.Form;
 
-interface Form {
+public interface Form {
     void accept(FormVisitor visitor);
 }

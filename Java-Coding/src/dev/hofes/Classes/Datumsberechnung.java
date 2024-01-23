@@ -4,7 +4,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class Datumsberechnung {
-    private static class Date {
+    public static class Date {
         public int day;
         public int month;
         public int year;

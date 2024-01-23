@@ -1,6 +1,6 @@
 package dev.hofes.DesignPatterns.VisitorPattern.Form;
 
-class CalculateAreaVisitor implements FormVisitor {
+public class CalculateAreaVisitor implements FormVisitor {
     public void visit(Circle circle) {
         double area = Math.PI * circle.getRadius() * circle.getRadius();
         System.out.println("Area of the circle: " + area);

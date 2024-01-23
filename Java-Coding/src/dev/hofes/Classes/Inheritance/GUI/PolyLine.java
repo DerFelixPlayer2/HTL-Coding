@@ -37,7 +37,7 @@ public class PolyLine {
     public String asString() {
         StringBuilder sb = new StringBuilder("PolyLine(");
         for (int i = 0; i < points.length; i++)
-            sb.append(points[i].toString()).append(i == points.length - 1 ? "" : ", ");
+            sb.append(points[i]).append(i == points.length - 1 ? "" : ", ");
         return sb.append(")").toString();
     }
 }

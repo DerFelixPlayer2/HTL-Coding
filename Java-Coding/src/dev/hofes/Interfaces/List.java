@@ -9,7 +9,7 @@ public class List<T extends Comparable<T>> implements Iterable<T> {
     private Node<T> head = null;
 
     public void add(T obj) {
-        Node<T> n = new Node<T>(obj);
+        Node<T> n = new Node<>(obj);
         if (head == null) {
             head = n;
         } else {
@@ -38,11 +38,11 @@ public class List<T extends Comparable<T>> implements Iterable<T> {
             System.out.println(c);
     }
 
-    public ListIterator iterator() {
+    public @NotNull ListIterator iterator() {
         return new ListIterator();
     }
 
-    private class ListIterator implements Iterator<T> {
+    public class ListIterator implements Iterator<T> {
         private Node<T> next;
 
         @Contract(pure = true)

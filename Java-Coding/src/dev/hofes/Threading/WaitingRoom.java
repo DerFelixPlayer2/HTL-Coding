@@ -1,7 +1,7 @@
 package dev.hofes.Threading;
 
 public class WaitingRoom extends Thread {
-    private final int maxChairs = 5;
+    private static final int maxChairs = 5;
     private int chairs = 0;
 
     public synchronized void enqueue() throws InterruptedException {

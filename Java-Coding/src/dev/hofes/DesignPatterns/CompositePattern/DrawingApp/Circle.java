@@ -2,7 +2,7 @@ package dev.hofes.DesignPatterns.CompositePattern.DrawingApp;
 
 import java.awt.*;
 
-class Circle extends Shape {
+public class Circle extends Shape {
     private final int r;
 
 

@@ -1,6 +1,6 @@
 package dev.hofes.DesignPatterns.VisitorPattern.Form;
 
-interface FormVisitor {
+public interface FormVisitor {
     void visit(Circle kreis);
 
     void visit(Rectangle rechteck);

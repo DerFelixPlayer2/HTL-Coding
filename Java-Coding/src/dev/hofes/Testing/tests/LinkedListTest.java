@@ -1,6 +1,5 @@
-package dev.hofes.Testing.tests;
-
 import dev.hofes.Testing.LinkedList;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -87,12 +86,10 @@ class LinkedListTest {
     void testNullPrint() {
         LinkedList linkedList = new LinkedList();
 
-        assertThrows(NullPointerException.class, () -> {
-            linkedList.printList();
-        });
+        assertThrows(NullPointerException.class, linkedList::printList);
     }
 
-    private String getListAsString(LinkedList linkedList) {
+    private @NotNull String getListAsString(@NotNull LinkedList linkedList) {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
