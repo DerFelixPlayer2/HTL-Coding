@@ -1,0 +1,8 @@
+package dev.hofes.FSST.design_patterns.proxy.internet;
+
+class RealInternet implements Internet {
+    @Override
+    public void connectTo(String url) {
+        System.out.println("Connection to: " + url);
+    }
+}

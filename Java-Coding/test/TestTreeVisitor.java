@@ -1,6 +1,6 @@
-import de.lolgamr17.FSST.design_patterns.visitor.tree.PrintVisitor;
-import de.lolgamr17.FSST.design_patterns.visitor.tree.SumVisitor;
-import de.lolgamr17.SEN.BinaryTrees.Tree;
+import dev.hofes.FSST.design_patterns.visitor.tree.PrintVisitor;
+import dev.hofes.FSST.design_patterns.visitor.tree.SumVisitor;
+import dev.hofes.SEN.BinaryTrees.Tree;
 import org.junit.jupiter.api.Test;
 
 public class TestTreeVisitor {

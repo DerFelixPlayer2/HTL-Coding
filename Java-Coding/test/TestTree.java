@@ -1,5 +1,5 @@
-import de.lolgamr17.SEN.BinaryTrees.Node;
-import de.lolgamr17.SEN.BinaryTrees.Tree;
+import dev.hofes.SEN.BinaryTrees.Node;
+import dev.hofes.SEN.BinaryTrees.Tree;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
