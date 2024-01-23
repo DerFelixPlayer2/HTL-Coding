@@ -1,0 +1,12 @@
+package dev.hofes.Classes.Abstraction.Stromversorgung;
+
+public final class Computer extends Consumer {
+    public Computer(String name, int consumption) {
+        super(name, consumption);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+}

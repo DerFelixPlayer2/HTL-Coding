@@ -1,6 +1,6 @@
-import dev.hofes.FSST.design_patterns.visitor.tree.PrintVisitor;
-import dev.hofes.FSST.design_patterns.visitor.tree.SumVisitor;
-import dev.hofes.SEN.BinaryTrees.Tree;
+import dev.hofes.DesignPatterns.VisitorPattern.Tree.PrintVisitor;
+import dev.hofes.DesignPatterns.VisitorPattern.Tree.SumVisitor;
+import dev.hofes.ComplexDatastructures.Trees.BinaryTree.Tree;
 import org.junit.jupiter.api.Test;
 
 public class TestTreeVisitor {

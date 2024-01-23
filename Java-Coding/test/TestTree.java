@@ -1,5 +1,5 @@
-import dev.hofes.SEN.BinaryTrees.Node;
-import dev.hofes.SEN.BinaryTrees.Tree;
+import dev.hofes.ComplexDatastructures.Trees.BinaryTree.Node;
+import dev.hofes.ComplexDatastructures.Trees.BinaryTree.Tree;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
