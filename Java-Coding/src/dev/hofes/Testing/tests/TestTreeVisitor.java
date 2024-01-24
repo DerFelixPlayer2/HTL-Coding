@@ -1,13 +1,13 @@
 import dev.hofes.DesignPatterns.VisitorPattern.Tree.PrintVisitor;
 import dev.hofes.DesignPatterns.VisitorPattern.Tree.SumVisitor;
-import dev.hofes.ComplexDatastructures.Trees.BinaryTree.Tree;
+import dev.hofes.ComplexDatastructures.Trees.BinaryTree;
 import org.junit.jupiter.api.Test;
 
 public class TestTreeVisitor {
 
     @Test
     public void testSumVisitor() {
-        final Tree<Integer> tree = new Tree<>();
+        final BinaryTree<Integer> tree = new BinaryTree<>();
 
         tree.insert(5);
         tree.insert(3);
@@ -24,7 +24,7 @@ public class TestTreeVisitor {
 
     @Test
     public void testPrintVisitor() {
-        final Tree<Integer> tree = new Tree<>();
+        final BinaryTree<Integer> tree = new BinaryTree<>();
 
         tree.insert(5);
         tree.insert(3);
