@@ -1,17 +1,18 @@
-package dev.hofes.ComplexDatastructures.Trees.BinaryTree;
+package dev.hofes.ComplexDatastructures.Trees;
 
+import dev.hofes.ComplexDatastructures.ComparableNode;
 import dev.hofes.DesignPatterns.VisitorPattern.Tree.TreeVisitor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.Stack;
 
-public class Tree<T extends Comparable<T>> implements Iterable<T> {
+public class BinaryTree<T extends Comparable<T>> implements Iterable<T> {
 
-    private Node<T> root;
+    private ComparableNode<T> root;
 
-    public Node<T> search(@NotNull T value) {
-        Node<T> p = root;
+    public ComparableNode<T> search(@NotNull T value) {
+        ComparableNode<T> p = root;
         while (p != null) {
             if (p.value == value) return p;
             if (p.value.compareTo(value) < 0) p = p.left;
@@ -20,25 +21,25 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
         return null;
     }
 
-    public Node<T> search_recursive(@NotNull T value) {
+    public ComparableNode<T> search_recursive(@NotNull T value) {
         return search_recursive(root, value);
     }
 
-    public Node<T> search_recursive(Node<T> p, @NotNull T value) {
+    public ComparableNode<T> search_recursive(ComparableNode<T> p, @NotNull T value) {
         if (p == null || p.value == value) return p;
         else if (value.compareTo(p.value) < 0) return search_recursive(p.left, value);
         return search_recursive(p.right, value);
     }
 
     public void insert(@NotNull T value) {
-        Node<T> p = root;
-        Node<T> father = null;
+        ComparableNode<T> p = root;
+        ComparableNode<T> father = null;
         while (p != null) {
             father = p;
             if (value.compareTo(p.value) < 0) p = p.left;
             else p = p.right;
         }
-        Node<T> n = new Node<>(value);
+        ComparableNode<T> n = new ComparableNode<>(value);
         if (father == null) root = n;
         else if (value.compareTo(father.value) < 0) father.left = n;
         else father.right = n;
@@ -48,16 +49,16 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
         root = insert_recursive(root, value);
     }
 
-    public @NotNull Node<T> insert_recursive(Node<T> p, @NotNull T value) {
-        if (p == null) p = new Node<>(value);
+    public @NotNull ComparableNode<T> insert_recursive(ComparableNode<T> p, @NotNull T value) {
+        if (p == null) p = new ComparableNode<>(value);
         else if (value.compareTo(p.value) < 0) p.left = insert_recursive(p.left, value);
         else p.right = insert_recursive(p.right, value);
         return p;
     }
 
-    public int treeToVine(@NotNull Node<T> root) {
-        Node<T> tail = root;
-        Node<T> rest = tail.right;
+    public int treeToVine(@NotNull ComparableNode<T> root) {
+        ComparableNode<T> tail = root;
+        ComparableNode<T> rest = tail.right;
         int n = 0;
 
         while (rest != null) {
@@ -66,7 +67,7 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
                 rest = rest.right;
                 n++;
             } else {
-                Node<T> p = rest.left;
+                ComparableNode<T> p = rest.left;
                 rest.left = p.right;
                 p.right = rest;
                 rest = p;
@@ -80,7 +81,7 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
     @NotNull
     @Override
     public Iterator<T> iterator() {
-        final Stack<Node<T>> traversal = new Stack<>();
+        final Stack<ComparableNode<T>> traversal = new Stack<>();
         traversal.push(root);
 
         return new Iterator<>() {
@@ -91,7 +92,7 @@ public class Tree<T extends Comparable<T>> implements Iterable<T> {
 
             @Override
             public T next() {
-                Node<T> n = traversal.pop();
+                ComparableNode<T> n = traversal.pop();
                 if (n.right != null) traversal.push(n.right);
                 if (n.left != null) traversal.push(n.left);
                 return n.value;

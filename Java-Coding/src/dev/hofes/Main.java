@@ -1,11 +1,11 @@
 package dev.hofes;
 
-import dev.hofes.ComplexDatastructures.Trees.BinaryTree.Tree;
+import dev.hofes.ComplexDatastructures.Trees.BinaryTree;
 
 public class Main {
     public static void main(String[] args) {
 
-        Tree<Integer> tree = new Tree<>();
+        BinaryTree<Integer> tree = new BinaryTree<>();
         tree.insert(5);
         tree.insert(4);
         tree.insert(3);

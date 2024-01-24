@@ -1,6 +1,6 @@
 package dev.hofes.DesignPatterns.VisitorPattern.Tree;
 
-import dev.hofes.ComplexDatastructures.Trees.BinaryTree.Node;
+import dev.hofes.ComplexDatastructures.ComparableNode;
 
 public class PrintVisitor<T extends Comparable<T>> implements TreeVisitor<T> {
 
@@ -17,7 +17,7 @@ public class PrintVisitor<T extends Comparable<T>> implements TreeVisitor<T> {
     }
 
     @Override
-    public void visit(Node<T> node) {
+    public void visit(ComparableNode<T> node) {
         switch(order) {
             case 0:
                 this.printedTree.append(node.value);
