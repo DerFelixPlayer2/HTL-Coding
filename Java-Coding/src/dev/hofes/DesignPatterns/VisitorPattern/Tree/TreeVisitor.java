@@ -1,7 +1,7 @@
 package dev.hofes.DesignPatterns.VisitorPattern.Tree;
 
-import dev.hofes.ComplexDatastructures.ComparableNode;
+import dev.hofes.ComplexDatastructures.ComparableTreeNode;
 
 public interface TreeVisitor<T extends Comparable<T>> {
-    void visit(ComparableNode<T> node);
+    void visit(ComparableTreeNode<T> node);
 }

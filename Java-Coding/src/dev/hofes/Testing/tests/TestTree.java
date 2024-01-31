@@ -1,4 +1,4 @@
-import dev.hofes.ComplexDatastructures.ComparableNode;
+import dev.hofes.ComplexDatastructures.ComparableTreeNode;
 import dev.hofes.ComplexDatastructures.Trees.BinaryTree;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ public class TestTree {
         tree.insert(-4);
         tree.insert(0);
 
-        final ComparableNode<Integer> root = tree.search(5);
+        final ComparableTreeNode<Integer> root = tree.search(5);
 
         assert root != null;
         assert root.value == 5;
@@ -44,7 +44,7 @@ public class TestTree {
         tree.insert_recursive(-4);
         tree.insert_recursive(0);
 
-        final ComparableNode<Integer> root = tree.search(5);
+        final ComparableTreeNode<Integer> root = tree.search(5);
 
         assert root != null;
         assert root.value == 5;
