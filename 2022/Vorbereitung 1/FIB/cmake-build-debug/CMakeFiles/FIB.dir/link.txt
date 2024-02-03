@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/FIB.dir/main.cpp.o -o FIB 
