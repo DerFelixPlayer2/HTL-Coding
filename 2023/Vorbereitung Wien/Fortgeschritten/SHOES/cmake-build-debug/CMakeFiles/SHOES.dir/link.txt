@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/SHOES.dir/shoes.cpp.o CMakeFiles/SHOES.dir/grader.cpp.o -o SHOES 

@@ -1,0 +1,3 @@
+C:/Users/felix/Desktop/CodeProjects/IOI/2023/STARTER/cmake-build-debug/CMakeFiles/STARTER.dir
+C:/Users/felix/Desktop/CodeProjects/IOI/2023/STARTER/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/felix/Desktop/CodeProjects/IOI/2023/STARTER/cmake-build-debug/CMakeFiles/rebuild_cache.dir

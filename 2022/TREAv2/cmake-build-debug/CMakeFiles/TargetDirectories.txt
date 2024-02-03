@@ -1,0 +1,3 @@
+C:/Users/felix/Desktop/CodeProjects/IOI/2022/TREAv2/cmake-build-debug/CMakeFiles/TREA2.dir
+C:/Users/felix/Desktop/CodeProjects/IOI/2022/TREAv2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/felix/Desktop/CodeProjects/IOI/2022/TREAv2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

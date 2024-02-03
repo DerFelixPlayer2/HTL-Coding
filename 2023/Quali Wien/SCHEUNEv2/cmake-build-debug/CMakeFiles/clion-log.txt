@@ -1,0 +1,4 @@
+C:\Windows\System32\wsl.exe --distribution Ubuntu-20.04 --exec /bin/bash -c "export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /mnt/c/Users/felix/Desktop/CodeProjects/IOI/2023/SCHEUNEv2/cmake-build-debug && /usr/local/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' /mnt/c/Users/felix/Desktop/CodeProjects/IOI/2023/SCHEUNEv2"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/c/Users/felix/Desktop/CodeProjects/IOI/2023/SCHEUNEv2/cmake-build-debug

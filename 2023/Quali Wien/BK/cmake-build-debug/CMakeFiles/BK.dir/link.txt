@@ -1,0 +1,1 @@
+/usr/bin/c++ -g "CMakeFiles/BK.dir/blinde-kuh.cpp.o" CMakeFiles/BK.dir/grader.cpp.o -o BK 
