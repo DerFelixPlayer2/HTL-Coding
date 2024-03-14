@@ -154,27 +154,31 @@ public class BinaryTree<T extends Comparable<T>> implements Iterable<T> {
     /**
      * Converts a tree to a vine.
      *
-     * @param root The root of the tree.
      * @return The number of nodes in the tree.
      */
-    private int treeToVine(@NotNull ComparableTreeNode<T> root) {
-        ComparableTreeNode<T> tail = root;
-        ComparableTreeNode<T> rest = tail.right;
+    private int treeToVine() {
+        ComparableTreeNode<T> root = new ComparableTreeNode<>(null);
+        ComparableTreeNode<T> trueRoot = root;
+        root.right = this.root;
+        ComparableTreeNode<T> tmp = root.right;
+
         int numberOfNodes = 0;
 
-        while (rest != null) {
-            if (rest.left == null) {
-                tail = rest;
-                rest = rest.right;
+        while (tmp != null) {
+            if (tmp.left == null) {
+                root = tmp;
+                tmp = tmp.right;
                 numberOfNodes++;
             } else {
-                ComparableTreeNode<T> p = rest.left;
-                rest.left = p.right;
-                p.right = rest;
-                rest = p;
-                tail.right = p;
+                ComparableTreeNode<T> oldTmp = tmp;
+                tmp = tmp.left;
+                oldTmp.left = tmp.right;
+                tmp.right = oldTmp;
+                root.right = tmp;
             }
         }
+
+        this.root = trueRoot.right;
 
         return numberOfNodes;
     }
@@ -182,31 +186,49 @@ public class BinaryTree<T extends Comparable<T>> implements Iterable<T> {
     /**
      * Converts a vine to a tree.
      *
-     * @param root The root of the tree.
      * @param size The size (number of nodes) of the tree.
      */
-    private void vineToTree(@NotNull ComparableTreeNode<T> root, int size) {
-        int fullCount = (int) (Math.log(size + 1) / Math.log(2));
-        ComparableTreeNode<T> rest = root;
-        ComparableTreeNode<T> tail = root.right;
-        for (int i = 0; i < fullCount; i++) {
-            ComparableTreeNode<T> restNext = tail.right;
-            ComparableTreeNode<T> tailNext = restNext.right;
-            rest.right = tailNext;
-            restNext.right = tailNext.left;
-            tailNext.left = restNext;
-            rest = restNext;
-            tail = tailNext;
+    private void vineToTree(int size) {
+        ComparableTreeNode<T> tmp = new ComparableTreeNode<T>(null);
+        tmp.right = this.root;
+
+        int h = (int) Math.floor(Math.log(size + 1) / Math.log(2));
+        int m = (int) Math.pow(2, h) - 1;
+
+        compress(tmp, size - m);
+        for (m = m / 2; m > 0; m /= 2) {
+            compress(tmp, m);
         }
-        rest.right = null;
+
+        this.root = tmp.right;
+    }
+
+    /**
+     * Performs a single rotation.
+     *
+     * @param root The root of the tree.
+     * @param i
+     */
+    private void compress(@NotNull ComparableTreeNode<T> root, int i) {
+        ComparableTreeNode<T> tmp = root.right;
+
+        for (int j = 0; j < i; j++) {
+            ComparableTreeNode<T> oldTmp = tmp;
+            tmp = tmp.right;
+            root.right = tmp;
+            oldTmp.right = tmp.left;
+            tmp.left = oldTmp;
+            root = tmp;
+            tmp = tmp.right;
+        }
     }
 
     /**
      * Balances the tree.
      */
     public void balance() {
-        int size = treeToVine(root);
-        vineToTree(root, size);
+        int size = treeToVine();
+        vineToTree(size);
     }
 
     public void accept(@NotNull TreeVisitor<T> visitor) {
